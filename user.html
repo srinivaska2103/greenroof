@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en" 
+      x-data="{ 
+        darkMode: localStorage.getItem('darkMode') === 'true', 
+        isRTL: localStorage.getItem('isRTL') === 'true',
+        isSidebarOpen: false,
+        activeTab: 'overview'
+      }" 
+      :class="{ 'dark': darkMode }" 
+      :dir="isRTL ? 'rtl' : 'ltr'">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+    <title>GreenRoof | Unified Client Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',
+                        darkBg: '#020617',
+                        darkCard: '#0f172a'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        body { transition: background-color 0.3s ease, color 0.3s ease; }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-darkBg text-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+    <div class="flex min-h-screen overflow-hidden">
+        
+        <aside 
+            x-cloak
+            :class="isSidebarOpen ? 'translate-x-0' : (isRTL ? 'translate-x-full' : '-translate-x-full')"
+            class="fixed inset-y-0 z-[60] w-72 bg-white dark:bg-darkCard border-r border-gray-200 dark:border-slate-800 transition-transform duration-300 lg:translate-x-0 lg:static lg:block shadow-2xl lg:shadow-none">
+            
+            <div class="flex flex-col h-full">
+                <div class="p-8">
+                    <a href="index.html">
+  <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white text-xl">🌱</div>
+                <span class="text-2xl font-bold heading-font tracking-tight text-primary">GreenRoof</span>
+            </div>
+                    </a>
+                   
+                    
+                </div>
+
+                <nav class="flex-1 px-4 space-y-2 overflow-y-auto">
+                    <button @click="activeTab = 'overview'; if(window.innerWidth < 1024) isSidebarOpen = false" 
+                            :class="activeTab === 'overview' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-gray-500 hover:bg-gray-100 dark:hover:bg-slate-800'"
+                            class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all group">
+                        <i class="fas fa-chart-pie text-lg"></i> Overview
+                    </button>
+                    
+                    <button @click="activeTab = 'roi'; if(window.innerWidth < 1024) isSidebarOpen = false" 
+                            :class="activeTab === 'roi' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-gray-500 hover:bg-gray-100 dark:hover:bg-slate-800'"
+                            class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all">
+                        <i class="fas fa-calculator text-lg"></i> ROI Calculator
+                    </button>
+
+                    <button @click="activeTab = 'schedule'; if(window.innerWidth < 1024) isSidebarOpen = false" 
+                            :class="activeTab === 'schedule' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-gray-500 hover:bg-gray-100 dark:hover:bg-slate-800'"
+                            class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all">
+                        <i class="fas fa-calendar-alt text-lg"></i> Scheduling
+                    </button>
+
+                   
+
+                    <button @click="activeTab = 'support'; if(window.innerWidth < 1024) isSidebarOpen = false" 
+                            :class="activeTab === 'support' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-gray-500 hover:bg-gray-100 dark:hover:bg-slate-800'"
+                            class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all">
+                        <i class="fas fa-headset text-lg"></i> Support & Chat
+                    </button>
+                </nav>
+
+                <div class="p-6 border-t border-gray-200 dark:border-slate-800 space-y-4 bg-gray-50/50 dark:bg-slate-900/50">
+                    <div class="flex gap-2">
+                        <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" 
+                                class="flex-1 p-3 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-xs font-bold uppercase text-center shadow-sm">
+                            <i :class="darkMode ? 'fas fa-sun text-yellow-400' : 'fas fa-moon text-slate-400'" class="block mb-1 text-lg"></i> 
+                            <span x-text="darkMode ? 'Light' : 'Dark'" class="dark:text-white"></span>
+                        </button>
+                        <button @click="isRTL = !isRTL; localStorage.setItem('isRTL', isRTL)" 
+                                class="flex-1 p-3 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-xs font-bold uppercase text-center shadow-sm">
+                            <i class="fas fa-language block mb-1 text-lg text-primary"></i> 
+                            <span x-text="isRTL ? 'LTR' : 'RTL'" class="dark:text-white"></span>
+                        </button>
+                    </div>
+                    <br>
+                    <a href="login.html">
+<button class="w-full py-3 bg-red-50 dark:bg-red-950/20 text-red-600 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-red-100 transition-all">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                    </a>
+                    
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto bg-gray-50 dark:bg-darkBg transition-colors duration-300">
+            
+            <header class="lg:hidden flex items-center justify-between p-4 bg-white dark:bg-darkCard border-b border-gray-200 dark:border-slate-800 sticky top-0 z-50">
+                <button @click="isSidebarOpen = true" class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-slate-800 text-slate-600 dark:text-white">
+                    <i class="fas fa-bars-staggered"></i>
+                </button>
+                <div class="font-display font-black text-primary text-lg tracking-tighter">Client Dashboard</div>
+                <!-- <div class="w-10 h-10 rounded-full bg-primary/20"></div> -->
+            </header>
+
+            <div class="p-4 md:p-8 lg:p-12 max-w-6xl w-full mx-auto">
+                
+  <div x-show="activeTab === 'overview'" class="animate-fade-in space-y-8">
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-white dark:bg-darkCard p-8 rounded-[2.5rem] border border-gray-100 dark:border-slate-800 shadow-sm transition-all">
+        <div class="flex items-center gap-5">
+            <div class="relative">
+                <img src="assets/t1" class="w-20 h-20 rounded-[1.5rem] shadow-xl border-4 border-gray-50 dark:border-slate-800">
+                <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-primary border-4 border-white dark:border-slate-900 rounded-full"></div>
+            </div>
+            <div>
+                <h1 class="text-3xl font-display font-black text-slate-900 dark:text-white leading-tight">Dashboard Live</h1>
+                <p class="text-gray-500 dark:text-gray-400 font-medium">Madurai: 32°C • System Optimal ☀️</p>
+            </div>
+        </div>
+        <a href="booknow.html" class="px-8 py-4 bg-primary text-white rounded-2xl font-bold text-sm shadow-xl shadow-primary/20 active:scale-95 transition-all hover:bg-emerald-600 flex items-center justify-center gap-2">
+            <i class="fas fa-plus"></i> New Booking
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-6 rounded-[2rem] bg-white dark:bg-darkCard border border-gray-100 dark:border-slate-800 shadow-sm group hover:border-orange-500 transition-all duration-500">
+            <div class="flex justify-between items-start mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-orange-100 dark:bg-orange-500/10 flex items-center justify-center text-orange-500 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-temperature-high text-xl"></i>
+                </div>
+                <span class="text-[10px] font-black text-emerald-500 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-1 rounded-md">-4°C Cool</span>
+            </div>
+            <div class="flex items-end gap-3">
+                <div class="text-4xl font-black text-slate-900 dark:text-white leading-none">28°C</div>
+                <div class="h-10 w-full flex items-end gap-1 pb-1">
+                    <div class="w-full h-1/2 bg-orange-200 dark:bg-slate-700 rounded-t-sm group-hover:h-full transition-all duration-700"></div>
+                    <div class="w-full h-2/3 bg-orange-300 dark:bg-slate-600 rounded-t-sm group-hover:h-3/4 transition-all duration-700"></div>
+                    <div class="w-full h-full bg-orange-500 rounded-t-sm"></div>
+                </div>
+            </div>
+            <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-4">Indoor Temperature</div>
+        </div>
+        <div class="p-6 rounded-[2rem] bg-white dark:bg-darkCard border border-gray-100 dark:border-slate-800 shadow-sm group hover:border-blue-500 transition-all duration-500">
+            <div class="flex justify-between items-start mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-500/10 flex items-center justify-center text-blue-500 relative">
+                    <i class="fas fa-droplet text-xl z-10"></i>
+                    <span class="absolute inset-0 rounded-2xl bg-blue-400 animate-ping opacity-20"></span>
+                </div>
+                <span class="text-[10px] font-black text-blue-500 uppercase">Running</span>
+            </div>
+            <div class="space-y-3">
+                <div class="flex justify-between text-xs font-bold dark:text-white">
+                    <span>Flow Rate</span>
+                    <span class="text-blue-500">85%</span>
+                </div>
+                <div class="w-full h-2 bg-gray-100 dark:bg-slate-700 rounded-full overflow-hidden shadow-inner">
+                    <div class="h-full bg-blue-500 rounded-full transition-all duration-1000 ease-out" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-4">Irrigation Status</div>
+        </div>
+        <div class="p-6 rounded-[2rem] bg-white dark:bg-darkCard border border-gray-100 dark:border-slate-800 shadow-sm group hover:border-emerald-500 transition-all duration-500">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="relative w-16 h-16 flex items-center justify-center">
+                    <svg class="w-full h-full transform -rotate-90">
+                        <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="6" fill="transparent" class="text-gray-100 dark:text-slate-800" />
+                        <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="6" fill="transparent" stroke-dasharray="175" stroke-dashoffset="10" class="text-emerald-500 group-hover:stroke-dashoffset-0 transition-all duration-1000" />
+                    </svg>
+                    <span class="absolute text-xs font-black dark:text-white">94%</span>
+                </div>
+                <div>
+                    <h4 class="text-2xl font-black text-slate-900 dark:text-white">Optimal</h4>
+                    <p class="text-[10px] font-bold text-emerald-500 uppercase">Garden Health</p>
+                </div>
+            </div>
+            <div class="flex gap-1">
+                <div class="h-1 flex-1 bg-emerald-500 rounded-full"></div>
+                <div class="h-1 flex-1 bg-emerald-500 rounded-full"></div>
+                <div class="h-1 flex-1 bg-emerald-500 rounded-full"></div>
+                <div class="h-1 flex-1 bg-emerald-200 dark:bg-slate-700 rounded-full"></div>
+            </div>
+        </div>
+        <div class="p-6 rounded-[2rem] bg-white dark:bg-darkCard border border-gray-100 dark:border-slate-800 shadow-sm group hover:border-purple-500 transition-all duration-500">
+            <div class="flex justify-between items-center mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-500/10 flex items-center justify-center text-purple-500">
+                    <i class="fas fa-wallet text-xl"></i>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black text-emerald-500 leading-none">₹1,240</div>
+                    <p class="text-[9px] font-bold text-gray-400 mt-1 uppercase">Monthly ROI</p>
+                </div>
+            </div>
+            <div class="h-12 w-full flex items-end gap-1">
+                <div class="flex-1 bg-purple-200 dark:bg-slate-700 h-1/2 rounded-sm group-hover:bg-purple-400 transition-colors"></div>
+                <div class="flex-1 bg-purple-200 dark:bg-slate-700 h-1/3 rounded-sm group-hover:bg-purple-400 transition-colors"></div>
+                <div class="flex-1 bg-purple-200 dark:bg-slate-700 h-2/3 rounded-sm group-hover:bg-purple-400 transition-colors"></div>
+                <div class="flex-1 bg-purple-200 dark:bg-slate-700 h-3/4 rounded-sm group-hover:bg-purple-400 transition-colors"></div>
+                <div class="flex-1 bg-purple-500 h-full rounded-sm"></div>
+            </div>
+            <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-4">Energy Savings</div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-2 p-8 rounded-[2.5rem] bg-white dark:bg-darkCard border border-gray-100 dark:border-slate-800 shadow-sm transition-all duration-300">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
+        <div>
+            <h3 class="text-xl font-bold font-display text-slate-900 dark:text-white">Detailed Savings Analysis</h3>
+            <p class="text-xs text-gray-400 mt-1">Comparing actual vs. projected energy ROI</p>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-primary"></span>
+                <span class="text-[10px] font-black uppercase tracking-wider text-gray-400">Actual</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-gray-200 dark:bg-slate-700"></span>
+                <span class="text-[10px] font-black uppercase tracking-wider text-gray-400">Projected</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="relative h-64 w-full flex items-end justify-between gap-2 sm:gap-4 px-2">
+        
+        <div class="absolute inset-0 flex flex-col justify-between pointer-events-none pb-8 pt-2">
+            <div class="w-full border-t border-gray-100 dark:border-slate-800/50"></div>
+            <div class="w-full border-t border-gray-100 dark:border-slate-800/50"></div>
+            <div class="w-full border-t border-gray-100 dark:border-slate-800/50"></div>
+            <div class="w-full border-t border-gray-100 dark:border-slate-800/50"></div>
+            <div class="w-full border-t border-gray-100 dark:border-slate-800/50"></div>
+        </div>
+        
+        <div class="flex-1 flex flex-col items-center gap-3 group relative z-10">
+            <div class="flex items-end gap-1 w-full h-full">
+                <div class="flex-1 bg-primary/40 rounded-t-lg h-[35%] transition-all duration-500 group-hover:bg-primary"></div>
+                <div class="flex-1 bg-gray-100 dark:bg-slate-800 rounded-t-lg h-[45%]"></div>
+            </div>
+            <span class="text-[10px] font-bold text-gray-400 uppercase">JAN</span>
+            <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">₹850 Saved</div>
+        </div>
+
+        <div class="flex-1 flex flex-col items-center gap-3 group relative z-10">
+            <div class="flex items-end gap-1 w-full h-full">
+                <div class="flex-1 bg-primary/40 rounded-t-lg h-[50%] transition-all duration-500 group-hover:bg-primary"></div>
+                <div class="flex-1 bg-gray-100 dark:bg-slate-800 rounded-t-lg h-[55%]"></div>
+            </div>
+            <span class="text-[10px] font-bold text-gray-400 uppercase">FEB</span>
+            <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">₹940 Saved</div>
+        </div>
+
+        <div class="flex-1 flex flex-col items-center gap-3 group relative z-10">
+            <div class="flex items-end gap-1 w-full h-full">
+                <div class="flex-1 bg-primary/40 rounded-t-lg h-[70%] transition-all duration-500 group-hover:bg-primary"></div>
+                <div class="flex-1 bg-gray-100 dark:bg-slate-800 rounded-t-lg h-[65%]"></div>
+            </div>
+            <span class="text-[10px] font-bold text-gray-400 uppercase">MAR</span>
+            <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">₹1,120 Saved</div>
+        </div>
+
+        <div class="flex-1 flex flex-col items-center gap-3 group relative z-10">
+            <div class="flex items-end gap-1 w-full h-full">
+                <div class="flex-1 bg-primary rounded-t-lg h-[95%] shadow-lg shadow-primary/20 transition-all duration-500"></div>
+                <div class="flex-1 bg-gray-100 dark:bg-slate-800 rounded-t-lg h-[85%]"></div>
+            </div>
+            <span class="text-[10px] font-bold text-primary uppercase">APR</span>
+            <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">₹1,240 Saved</div>
+        </div>
+
+        <div class="flex-1 flex flex-col items-center gap-3 group relative opacity-50 z-10">
+            <div class="flex items-end gap-1 w-full h-full">
+                <div class="flex-1 border-2 border-dashed border-primary/30 rounded-t-lg h-[80%]"></div>
+                <div class="flex-1 bg-gray-50 dark:bg-slate-800/30 rounded-t-lg h-[85%]"></div>
+            </div>
+            <span class="text-[10px] font-bold text-gray-400 uppercase">MAY</span>
+        </div>
+
+        <div class="flex-1 flex flex-col items-center gap-3 group relative opacity-50 z-10">
+            <div class="flex items-end gap-1 w-full h-full">
+                <div class="flex-1 border-2 border-dashed border-primary/30 rounded-t-lg h-[85%]"></div>
+                <div class="flex-1 bg-gray-50 dark:bg-slate-800/30 rounded-t-lg h-[90%]"></div>
+            </div>
+            <span class="text-[10px] font-bold text-gray-400 uppercase">JUN</span>
+        </div>
+    </div>
+</div>
+
+        <div class="p-8 rounded-[2.5rem] bg-white dark:bg-darkCard border border-gray-100 dark:border-slate-800 shadow-sm">
+            <h3 class="text-xl font-bold font-display text-slate-900 dark:text-white mb-6">Maintenance Feed</h3>
+            <div class="space-y-6">
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-blue-500 flex-shrink-0">
+                        <i class="fas fa-droplet text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold dark:text-white">Auto-Irrigation Cycle</p>
+                        <p class="text-xs text-gray-500">Today at 06:00 AM • Completed</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                        <i class="fas fa-user-check text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold dark:text-white">Site Visit Completed</p>
+                        <p class="text-xs text-gray-500">April 18, 2026 • By Agent #04</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-500/10 flex items-center justify-center text-orange-500 flex-shrink-0">
+                        <i class="fas fa-triangle-exclamation text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold dark:text-white">Low Nutrient Alert</p>
+                        <p class="text-xs text-gray-500">April 15, 2026 • Section C</p>
+                    </div>
+                </div>
+            </div>
+            <button class="w-full mt-8 py-3 rounded-xl border-2 border-gray-100 dark:border-slate-800 text-xs font-black uppercase tracking-widest text-gray-400 hover:text-primary hover:border-primary transition-all">View Full History</button>
+        </div>
+    </div>
+
+    <div class="p-8 rounded-[2.5rem] bg-slate-900 text-white relative overflow-hidden group">
+        <div class="absolute -right-20 -top-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/30 transition-all"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
+            <div class="w-24 h-24 rounded-3xl bg-white/10 backdrop-blur-md flex items-center justify-center text-5xl">
+                🌵
+            </div>
+            <div class="flex-1 text-center md:text-left">
+                <h3 class="text-2xl font-black font-[Outfit] mb-2">Smart Action Recommended</h3>
+                <p class="text-white/60 text-sm leading-relaxed max-w-2xl">
+                    Temperatures in Madurai are expected to hit <span class="text-primary font-bold">38°C</span> this weekend. We recommend activating the "Mist Cool" cycle to protect your sensitive organic leafy greens.
+                </p>
+            </div>
+            <button class="px-6 py-3 bg-white text-slate-900 rounded-xl font-bold text-sm hover:scale-105 active:scale-95 transition-all">
+                Activate Mist Now
+            </button>
+        </div>
+    </div>
+</div>
+
+               <div x-show="activeTab === 'roi'" class="animate-fade-in space-y-8" x-cloak x-data="{ area: 1200 }">
+    
+    <div class="p-8 md:p-10 bg-white dark:bg-darkCard rounded-[3rem] border border-gray-100 dark:border-slate-800 shadow-sm transition-all">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
+            <div>
+                <h2 class="text-3xl font-display font-black text-slate-900 dark:text-white leading-tight">ROI Estimator</h2>
+                <p class="text-gray-500 text-sm mt-1">Calculate your green investment returns</p>
+            </div>
+            <div class="px-4 py-2 bg-primary/10 rounded-xl border border-primary/20">
+                <span class="text-primary font-black text-sm uppercase tracking-widest">Live Projection</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="space-y-8">
+                <div class="space-y-4">
+                    <div class="flex justify-between items-end">
+                        <label class="text-xs font-black uppercase text-gray-400 tracking-widest">Rooftop Area</label>
+                        <span class="text-2xl font-black text-primary" x-text="area + ' Sq.Ft'"></span>
+                    </div>
+                    <input type="range" min="200" max="5000" step="50" x-model="area" 
+                           class="w-full h-2 bg-gray-100 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary">
+                    <div class="flex justify-between text-[10px] font-bold text-gray-400">
+                        <span>200 SQ.FT</span>
+                        <span>5000 SQ.FT</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-2xl bg-gray-50 dark:bg-slate-800/50 border border-gray-100 dark:border-slate-700">
+                        <i class="fas fa-bolt text-orange-500 mb-2"></i>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase">Energy Savings</p>
+                        <p class="text-lg font-black dark:text-white" x-text="'₹' + Math.round(area * 15).toLocaleString() + '/yr'"></p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-gray-50 dark:bg-slate-800/50 border border-gray-100 dark:border-slate-700">
+                        <i class="fas fa-carrot text-emerald-500 mb-2"></i>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase">Organic Produce</p>
+                        <p class="text-lg font-black dark:text-white" x-text="'₹' + Math.round(area * 8).toLocaleString() + '/yr'"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative p-8 bg-emerald-50 dark:bg-emerald-500/5 rounded-[2.5rem] border border-emerald-100 dark:border-emerald-500/20 overflow-hidden">
+                <div class="relative z-10">
+                    <h4 class="font-black text-emerald-600 dark:text-emerald-400 mb-6 uppercase tracking-tighter text-sm">Payback Timeline</h4>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white dark:bg-slate-900 flex items-center justify-center shadow-sm">
+                                <i class="fas fa-history text-emerald-500"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">Full Setup Cost Recovery</p>
+                                <p class="text-xl font-black text-slate-900 dark:text-white">18 - 24 Months</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-[10px] font-black text-emerald-600 dark:text-emerald-500 uppercase">
+                                <span>Installation</span>
+                                <span>Profit Zone</span>
+                            </div>
+                            <div class="w-full h-4 bg-emerald-200/30 dark:bg-slate-800 rounded-full flex overflow-hidden p-1">
+                                <div class="h-full bg-primary rounded-full" style="width: 40%"></div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-[11px] leading-relaxed text-emerald-800/60 dark:text-emerald-300/40 italic">
+                            *Estimates based on Madurai average grid tariff and local organic market prices.
+                        </p>
+                    </div>
+                </div>
+                <i class="fas fa-seedling absolute -bottom-6 -right-6 text-9xl text-emerald-500/10 rotate-12"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 bg-slate-900 rounded-[2rem] text-white">
+            <i class="fas fa-cloud-sun text-primary mb-4 text-xl"></i>
+            <h5 class="font-bold mb-1">Carbon Offset</h5>
+            <p class="text-xs text-white/50 leading-relaxed">Your roof size offsets approx <span class="text-white font-bold">450kg of CO2</span> annually, equivalent to planting 20 trees.</p>
+        </div>
+
+        <div class="p-6 bg-white dark:bg-darkCard rounded-[2rem] border border-gray-100 dark:border-slate-800 shadow-sm">
+            <i class="fas fa-chart-line text-blue-500 mb-4 text-xl"></i>
+            <h5 class="font-bold mb-1 dark:text-white">Property Value</h5>
+            <p class="text-xs text-gray-500 leading-relaxed">Premium green-roofed homes see a <span class="text-slate-900 dark:text-white font-bold">5-8% increase</span> in resale market demand.</p>
+        </div>
+
+        <div class="p-6 bg-white dark:bg-darkCard rounded-[2rem] border border-gray-100 dark:border-slate-800 shadow-sm">
+            <i class="fas fa-university text-purple-500 mb-4 text-xl"></i>
+            <h5 class="font-bold mb-1 dark:text-white">Civic Perks</h5>
+            <p class="text-xs text-gray-500 leading-relaxed">Check local Madurai corporation guidelines for potential <span class="text-slate-900 dark:text-white font-bold">property tax rebates</span>.</p>
+        </div>
+    </div>
+</div>
+
+               <div x-show="activeTab === 'schedule'" class="animate-fade-in space-y-8" x-cloak>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-2 space-y-8">
+            <div class="p-8 bg-white dark:bg-darkCard rounded-[2.5rem] border border-gray-100 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-6 opacity-5 group-hover:scale-110 transition-transform duration-700">
+                    <i class="fas fa-calendar-check text-9xl text-primary"></i>
+                </div>
+                
+                <h2 class="text-2xl font-display font-black text-slate-900 dark:text-white mb-8 relative z-10">Service Management</h2>
+                
+                <div class="space-y-4 relative z-10">
+                    <div class="flex flex-col md:flex-row items-start md:items-center gap-6 p-6 bg-gray-50 dark:bg-slate-800/50 rounded-3xl border border-gray-100 dark:border-slate-700">
+                        <div class="w-16 h-16 bg-primary text-white flex items-center justify-center rounded-2xl text-2xl shadow-lg shadow-primary/20">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                                <h4 class="font-bold text-lg dark:text-white uppercase tracking-tight">Standard Maintenance</h4>
+                            </div>
+                            <p class="text-sm text-gray-500">Confirmed for <span class="text-slate-900 dark:text-white font-bold">Saturday, April 25, 2026</span></p>
+                            <p class="text-[10px] text-gray-400 mt-1 uppercase font-bold tracking-widest">Time Slot: 09:00 AM - 11:00 AM</p>
+                        </div>
+                        <div class="flex gap-2 w-full md:w-auto">
+                            <button class="flex-1 md:flex-none px-4 py-2 bg-white dark:bg-slate-700 border dark:border-slate-600 rounded-xl text-xs font-bold hover:bg-gray-50 transition-all">Reschedule</button>
+                            <button class="flex-1 md:flex-none px-4 py-2 text-red-500 text-xs font-bold hover:bg-red-50 dark:hover:bg-red-950/20 rounded-xl transition-all">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button class="flex items-center justify-center gap-3 py-4 bg-primary text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                            <i class="fas fa-plus-circle"></i> Book Emergency Visit
+                        </button>
+                        <button class="flex items-center justify-center gap-3 py-4 bg-slate-900 dark:bg-slate-800 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all">
+                            <i class="fas fa-video"></i> Online Consultation
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-8 bg-white dark:bg-darkCard rounded-[2.5rem] border border-gray-100 dark:border-slate-800 shadow-sm">
+                <h3 class="font-bold text-slate-900 dark:text-white mb-6">Expert Availability</h3>
+                <div class="grid grid-cols-7 gap-2 text-center">
+                    <template x-for="day in ['M','T','W','T','F','S','S']">
+                        <span class="text-[10px] font-black text-gray-400 uppercase pb-2" x-text="day"></span>
+                    </template>
+                    <div class="aspect-square rounded-xl bg-gray-50 dark:bg-slate-800/30 flex items-center justify-center text-[10px] text-gray-300">20</div>
+                    <div class="aspect-square rounded-xl bg-gray-50 dark:bg-slate-800/30 flex items-center justify-center text-[10px] text-gray-300">21</div>
+                    <div class="aspect-square rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 flex items-center justify-center text-[10px] text-primary font-bold">22</div>
+                    <div class="aspect-square rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 flex items-center justify-center text-[10px] text-primary font-bold">23</div>
+                    <div class="aspect-square rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 flex items-center justify-center text-[10px] text-primary font-bold">24</div>
+                    <div class="aspect-square rounded-xl bg-primary text-white shadow-lg shadow-primary/30 flex items-center justify-center text-[10px] font-black">25</div>
+                    <div class="aspect-square rounded-xl bg-gray-50 dark:bg-slate-800/30 flex items-center justify-center text-[10px] text-gray-300">26</div>
+                </div>
+                <p class="text-[10px] text-gray-400 mt-6 italic text-center">Green slots indicate technician availability in Madurai North.</p>
+            </div>
+        </div>
+
+        <div class="space-y-8">
+            <div class="p-8 bg-slate-900 rounded-[2.5rem] text-white relative overflow-hidden">
+                <div class="relative z-10">
+                    <p class="text-primary text-[10px] font-black uppercase tracking-widest mb-2">Current Plan</p>
+                    <h4 class="text-2xl font-display font-black mb-4">Premium Care</h4>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-2 text-xs text-gray-300"><i class="fas fa-check text-primary"></i> 2 Monthly Site Visits</li>
+                        <li class="flex items-center gap-2 text-xs text-gray-300"><i class="fas fa-check text-primary"></i> Free Nutrient Refills</li>
+                        <li class="flex items-center gap-2 text-xs text-gray-300"><i class="fas fa-check text-primary"></i> 24/7 Digital Support</li>
+                    </ul>
+                    <button class="w-full py-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-xl text-xs font-bold transition-all">Manage Subscription</button>
+                </div>
+            </div>
+
+            <div class="p-8 bg-white dark:bg-darkCard rounded-[2.5rem] border border-gray-100 dark:border-slate-800 shadow-sm">
+                <h3 class="text-sm font-black uppercase text-gray-400 mb-6 tracking-widest">Service History</h3>
+                <div class="space-y-6">
+                    <div class="relative pl-6 border-l-2 border-gray-100 dark:border-slate-800">
+                        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-slate-900 border-2 border-emerald-500"></div>
+                        <p class="text-xs font-bold dark:text-white">System Calibration</p>
+                        <p class="text-[10px] text-gray-500 mt-1">March 28, 2026 • Area B Fix</p>
+                    </div>
+                    <div class="relative pl-6 border-l-2 border-gray-100 dark:border-slate-800">
+                        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-slate-900 border-2 border-emerald-500"></div>
+                        <p class="text-xs font-bold dark:text-white">Soil Nutrition Refill</p>
+                        <p class="text-[10px] text-gray-500 mt-1">March 10, 2026 • All Sections</p>
+                    </div>
+                    <div class="relative pl-6">
+                        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-slate-900 border-2 border-gray-200 dark:border-slate-700"></div>
+                        <p class="text-xs font-bold text-gray-400">Installation Completed</p>
+                        <p class="text-[10px] text-gray-400 mt-1">Feb 22, 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+               
+
+             <div x-show="activeTab === 'support'" class="animate-fade-in space-y-8" x-cloak>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <a href="https://wa.me/91XXXXXXXXXX" class="group p-6 bg-[#25D366] text-white rounded-[2rem] flex items-center gap-4 shadow-lg shadow-emerald-500/20 hover:scale-[1.02] transition-all">
+            <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <div>
+                <p class="text-[10px] font-black uppercase opacity-80">Instant Help</p>
+                <p class="font-bold">WhatsApp Chat</p>
+            </div>
+        </a>
+        <div class="p-6 bg-white dark:bg-darkCard rounded-[2rem] border border-gray-100 dark:border-slate-800 flex items-center gap-4 shadow-sm">
+            <div class="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center text-xl">
+                <i class="fas fa-phone-volume"></i>
+            </div>
+            <div>
+                <p class="text-[10px] font-black uppercase text-gray-400">Call Us</p>
+                <p class="font-bold dark:text-white">+91 98765 43210</p>
+            </div>
+        </div>
+        <div class="p-6 bg-white dark:bg-darkCard rounded-[2rem] border border-gray-100 dark:border-slate-800 flex items-center gap-4 shadow-sm">
+            <div class="w-12 h-12 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center text-xl">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+                <p class="text-[10px] font-black uppercase text-gray-400">Email Support</p>
+                <p class="font-bold dark:text-white">help@greenroof.in</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-2 space-y-8">
+            <div class="p-8 md:p-10 bg-white dark:bg-darkCard rounded-[3rem] border border-gray-100 dark:border-slate-800 shadow-sm transition-all">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h3 class="text-2xl font-black font-display text-slate-900 dark:text-white">Open a Ticket</h3>
+                        <p class="text-sm text-gray-500 mt-1">Our experts usually respond within 2 hours.</p>
+                    </div>
+                    <span class="hidden sm:block px-4 py-1.5 bg-primary/10 text-primary text-[10px] font-black uppercase rounded-full border border-primary/20">Active Support</span>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase text-gray-400 tracking-widest ml-2">Issue Type</label>
+                            <select class="w-full px-5 py-4 bg-gray-50 dark:bg-slate-800 border-none rounded-2xl text-sm font-bold dark:text-white focus:ring-2 focus:ring-primary outline-none transition-all">
+                                <option>Technical Issue (Irrigation/Sensor)</option>
+                                <option>Plant Health & Nutrition</option>
+                                <option>Billing & Payments</option>
+                                <option>Request Maintenance Visit</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase text-gray-400 tracking-widest ml-2">Urgency</label>
+                            <div class="flex gap-2">
+                                <button class="flex-1 py-4 rounded-2xl border-2 border-primary bg-primary/10 text-primary text-xs font-black">Standard</button>
+                                <button class="flex-1 py-4 rounded-2xl border border-gray-100 dark:border-slate-700 text-xs font-bold text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all">Emergency</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase text-gray-400 tracking-widest ml-2">Detailed Description</label>
+                        <textarea rows="5" class="w-full p-6 bg-gray-50 dark:bg-slate-800 border-none rounded-[2rem] text-sm dark:text-white focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="How can our horticulturists help you today?"></textarea>
+                    </div>
+
+                    <button class="w-full py-5 bg-slate-900 dark:bg-primary text-white dark:text-slate-900 rounded-[2.5rem] font-black text-xs uppercase tracking-[0.2em] shadow-2xl shadow-primary/20 transition-all hover:scale-[1.01] active:scale-95">
+                        Submit Support Ticket
+                    </button>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div class="space-y-6">
+            <div class="p-8 bg-slate-900 rounded-[2.5rem] text-white relative overflow-hidden">
+                <div class="relative z-10">
+                    <h4 class="text-sm font-black uppercase text-primary tracking-widest mb-6">Expert Status</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+                            <span class="text-xs font-bold">Agents Online (4)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 rounded-full bg-orange-500"></div>
+                            <span class="text-xs font-bold text-gray-400">Technical Team (Busy)</span>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-white/10">
+                        <p class="text-[10px] text-gray-400 uppercase font-black mb-2">Average Response</p>
+                        <p class="text-2xl font-black italic text-primary">~18 Mins</p>
+                    </div>
+                </div>
+                <i class="fas fa-headset absolute -bottom-4 -right-4 text-8xl text-white/5"></i>
+            </div>
+
+            <div class="p-8 bg-white dark:bg-darkCard rounded-[2.5rem] border border-gray-100 dark:border-slate-800 shadow-sm">
+                <h4 class="text-xs font-black uppercase text-gray-400 tracking-widest mb-6">Ticket History</h4>
+                <div class="space-y-6">
+                    <div class="relative pl-6 border-l-2 border-orange-500">
+                        <div class="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-orange-500"></div>
+                        <p class="text-xs font-bold dark:text-white">Sensor Calibration</p>
+                        <p class="text-[10px] text-gray-500 mt-1">#VX-9902 • Pending</p>
+                    </div>
+                    <div class="relative pl-6 border-l-2 border-emerald-500">
+                        <div class="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-emerald-500"></div>
+                        <p class="text-xs font-bold dark:text-white">Soil Delivery</p>
+                        <p class="text-[10px] text-gray-500 mt-1">#VX-8812 • Resolved</p>
+                    </div>
+                </div>
+                <button class="w-full mt-8 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-primary transition-all">View All Archives</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+            </div>
+        </main>
+    </div>
+
+    <div x-show="isSidebarOpen" @click="isSidebarOpen = false" class="fixed inset-0 z-[55] bg-slate-900/60 backdrop-blur-sm lg:hidden"></div>
+
+</body>
+</html>

@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" x-data="appData()" :class="{ 'dark': darkMode }" :dir="ltr ? 'ltr' : 'rtl'">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+
+    <title>GreenRoof | Urban Farming Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',
+                        darkBg: '#0f172a',
+                        darkCard: '#1e293b'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease; }
+        .heading-font { font-family: 'Outfit', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-900 dark:bg-darkBg dark:text-gray-100 transition-colors duration-300">
+
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800" x-data="{ mobileMenu: false, profileDrop: false }">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+        <a href="index.html" class="flex-shrink-0">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white text-xl">🌱</div>
+                <span class="text-2xl font-bold heading-font tracking-tight text-primary">GreenRoof</span>
+            </div>
+        </a>
+        
+
+        <div class="hidden lg:flex items-center space-x-4 xl:space-x-8">
+            <div id="nav-menu" class="hidden lg:flex items-center space-x-8">
+    <div class="flex space-x-6 text-sm font-medium">
+        <a href="index.html" class="nav-link hover:text-primary transition py-2 border-b-2 border-transparent">Home</a>
+        <a href="home2.html" class="nav-link hover:text-primary transition py-2 border-b-2 border-transparent">Home2</a>
+        <a href="about.html" class="nav-link hover:text-primary transition py-2 border-b-2 border-transparent">About</a>
+        <a href="service.html" class="nav-link hover:text-primary transition py-2 border-b-2 border-transparent">Services</a>
+        <a href="gallery.html" class="nav-link hover:text-primary transition py-2 border-b-2 border-transparent">Gallery</a>
+        <a href="contact.html" class="nav-link hover:text-primary transition py-2 border-b-2 border-transparent">Contact</a>
+    </div>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the current page filename (e.g., "about.html")
+        const currentPath = window.location.pathname.split("/").pop();
+
+        // Target all links with the 'nav-link' class
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+            const linkPath = link.getAttribute('href');
+
+            // Check if link matches current path
+            if (currentPath === linkPath || (currentPath === "" && linkPath === "index.html")) {
+                // Active Styles
+                link.classList.add('text-primary', 'border-primary');
+                link.classList.remove('border-transparent');
+            } else {
+                // Inactive Styles
+                link.classList.remove('text-primary', 'border-primary');
+                link.classList.add('border-transparent');
+            }
+        });
+    });
+</script>
+
+            <div class="relative" x-data="{ profileDrop: false }">
+                <button @click="profileDrop = !profileDrop" @click.away="profileDrop = false" class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded-full hover:bg-gray-200 transition">
+                    <div class="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center text-xs">👤</div>
+                    <span class="text-xs font-semibold">User</span>
+                </button>
+                <div x-show="profileDrop" x-transition class="absolute right-0 mt-2 w-48 bg-white dark:bg-darkCard rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 py-2 z-50">
+                    <a href="user.html" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm">User Dashboard</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 xl:gap-3">
+                <a href="booknow.html">
+                <button class="bg-primary text-white px-4 xl:px-5 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition whitespace-nowrap">Book Now</button>
+
+                </a>
+                <a href="login.html">
+                <button class="border border-primary text-primary px-4 xl:px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary hover:text-white transition">Login</button>
+
+                </a>
+            </div>
+
+            <div class="flex gap-2 border-l pl-4 dark:border-gray-700">
+                <button @click="toggleTheme()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 transition-colors">
+                    <span x-text="darkMode ? '☀️' : '🌙'"></span>
+                </button>
+                <button @click="toggleLtr()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-[10px] font-bold transition-colors">
+                    <span x-text="ltr ? 'LTR' : 'RTL'"></span>
+                </button>
+            </div>
+        </div>
+        
+
+        <button @click="mobileMenu = !mobileMenu" class="lg:hidden p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path x-show="!mobileMenu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                <path x-show="mobileMenu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+    </div>
+   
+</div>
+
+   <div x-show="mobileMenu" 
+     x-transition:enter="transition ease-out duration-200"
+     x-transition:enter-start="opacity-0 -translate-y-4"
+     x-transition:enter-end="opacity-100 translate-y-0"
+     class="lg:hidden bg-white dark:bg-darkBg border-b dark:border-gray-800 px-4 pt-2 pb-6 space-y-4">
+    
+    <div class="flex flex-col space-y-2 font-medium">
+        <a href="index.html" class="nav-link px-4 py-3 rounded-lg border-l-4 border-transparent hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">Home</a>
+        <a href="home2.html" class="nav-link px-4 py-3 rounded-lg border-l-4 border-transparent hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">Home2</a>
+        <a href="about.html" class="nav-link px-4 py-3 rounded-lg border-l-4 border-transparent hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">About</a>
+        <a href="service.html" class="nav-link px-4 py-3 rounded-lg border-l-4 border-transparent hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">Services</a>
+        <a href="gallery.html" class="nav-link px-4 py-3 rounded-lg border-l-4 border-transparent hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">Gallery</a>
+        <a href="contact.html" class="nav-link px-4 py-3 rounded-lg border-l-4 border-transparent hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">Contact</a>
+    </div>
+
+    <hr class="dark:border-gray-800">
+
+    <div x-data="{ mobDash: false }" class="space-y-2">
+        <button @click="mobDash = !mobDash" class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-sm">👤</div>
+                <span class="font-semibold text-sm">User Account</span>
+            </div>
+            <svg class="w-4 h-4 transition-transform" :class="mobDash ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        
+        <div x-show="mobDash" x-collapse class="pl-12 pr-4 pb-2 space-y-3">
+            <a href="user.html" class="block text-sm text-gray-600 dark:text-gray-400 hover:text-primary">User Dashboard</a>
+            
+        </div>
+    </div>
+
+    <div class="flex flex-col gap-3">
+        <a href="booknow.html">
+        <button class="w-full bg-primary text-white py-3 rounded-xl font-bold shadow-lg shadow-primary/20">Book Now</button>
+
+        </a>
+        <a href="login.html">
+        <button class="w-full border border-primary text-primary py-3 rounded-xl font-bold">Login</button>
+
+        </a>
+    </div>
+ <div class="flex justify-between items-center pt-4 px-2">
+        <button @click="toggleTheme()" class="flex items-center gap-2 text-sm font-medium text-gray-500">
+            <span class="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg" x-text="darkMode ? '☀️' : '🌙'"></span>
+            <span x-text="darkMode ? 'Light Mode' : 'Dark Mode'"></span>
+        </button>
+        <button @click="toggleLtr()" class="flex items-center gap-2 text-sm font-medium text-gray-500">
+            <span x-text="ltr ? 'LTR' : 'RTL'" class="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-[10px] font-bold"></span>
+            Direction
+        </button>
+    </div>
+    
+</div>    
+    </nav>
+    <div class="bg-primary py-2 px-4 text-center overflow-hidden">
+    <p class="text-slate-900 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] animate-pulse">
+        🔥 Limited installations available this month — 4 spots remaining
+    </p>
+</div>
+
+<section class="relative min-h-[85vh] flex items-center bg-slate-900 overflow-hidden transition-colors duration-300">
+    <div class="absolute inset-0 z-0">
+        <img src="assets/Lush Green Roof Installation" 
+             class="w-full h-full object-cover opacity-40" alt="Lush Green Roof Installation">
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
+    </div>
+
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary/20 blur-[120px] rounded-full"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div class="max-w-3xl">
+            
+            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 mb-8">
+                <i class="fas fa-temperature-arrow-down text-primary"></i>
+                <span class="text-white text-[10px] md:text-xs font-bold uppercase tracking-widest">
+                    Beat the Chennai Heat
+                </span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black font-[Outfit] text-white mb-6 leading-[1.1]">
+                Reduce Heat by <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400 ">Up to 10°C</span> <br>
+                with a Green Roof 🌿
+            </h1>
+
+            <p class="text-gray-300 text-sm md:text-lg lg:text-xl font-medium leading-relaxed mb-10 max-w-xl opacity-90">
+                Save electricity, grow fresh plants, and upgrade your rooftop with a professionally installed, water-efficient green roof system by VEXA TECH.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center gap-4 lg:gap-6">
+                <a href="booknow.html" class="w-full sm:w-auto px-10 py-5 bg-primary text-slate-900 rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all text-center">
+                    Get Free Consultation
+                </a>
+                <a href="contact.html">
+<button class="w-full sm:w-auto px-10 py-5 bg-white/5 backdrop-blur-md border border-white/20 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all text-center flex items-center justify-center gap-2">
+                    <i class="fas fa-calculator"></i>
+                    Get Instant Quote
+                </button>
+                </a>
+                
+            </div>
+
+            <div class="mt-12 flex flex-wrap gap-6 md:gap-10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary border border-white/10">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div>
+                        <span class="block text-white font-bold text-sm">30% Lower Bills</span>
+                        <span class="text-[10px] text-gray-500 uppercase font-bold tracking-tighter">Electricity Savings</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary border border-white/10">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <span class="block text-white font-bold text-sm">Waterproofed</span>
+                        <span class="text-[10px] text-gray-500 uppercase font-bold tracking-tighter">Layered Protection</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="py-16 md:py-24 bg-white dark:bg-darkBg transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-0 rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200 dark:shadow-none border border-gray-100 dark:border-gray-800">
+            
+            <div class="w-full lg:w-1/2 p-10 md:p-16 lg:p-20 bg-slate-50 dark:bg-slate-900/50 relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="inline-block px-4 py-1 rounded-full bg-red-100 text-red-600 text-[10px] font-black uppercase tracking-widest mb-6">
+                        Current Struggle
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-black font-[Outfit] text-slate-800 dark:text-white mb-8">
+                        Tired of a <span class="text-red-500">Scorching</span> Roof?
+                    </h2>
+                    
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center flex-shrink-0 text-orange-500">
+                                <i class="fas fa-sun text-xl"></i>
+                            </div>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm md:text-base">
+                                <strong class="text-slate-800 dark:text-gray-200 block">Extreme Summer Heat</strong>
+                                Concrete absorbs radiation, turning your top floor into an oven (45°C+).
+                            </p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center flex-shrink-0 text-blue-400">
+                                <i class="fas fa-file-invoice-dollar text-xl"></i>
+                            </div>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm md:text-base">
+                                <strong class="text-slate-800 dark:text-gray-200 block">Sky-High AC Bills</strong>
+                                Your AC works overtime to fight the heat leaking through the ceiling.
+                            </p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center flex-shrink-0 text-gray-400">
+                                <i class="fas fa-mountain-sun text-xl"></i>
+                            </div>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm md:text-base">
+                                <strong class="text-slate-800 dark:text-gray-200 block">Wasted Terrace Space</strong>
+                                An empty concrete slab that adds no value to your lifestyle or property.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-1/2 p-10 md:p-16 lg:p-20 bg-primary relative group overflow-hidden transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary via-emerald-600 to-teal-700 opacity-90"></div>
+                <div class="absolute -top-24 -right-24 w-64 h-64 bg-white/20 rounded-full blur-3xl animate-pulse"></div>
+
+                <div class="relative z-10 text-white">
+                    <span class="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest mb-6">
+                        The GreenRoof Way
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-black font-[Outfit] mb-8 leading-tight">
+                        Transform into a <br> <span class="bg-white text-primary px-2">Green Paradise</span>
+                    </h2>
+                    
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4 group/item">
+                            <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform">
+                                <i class="fas fa-leaf text-xl"></i>
+                            </div>
+                            <p class="text-white/90 text-sm md:text-base">
+                                <strong class="text-white block font-bold">Natural Cooling Layer</strong>
+                                Reduce indoor temperatures by up to 10°C without spending a rupee on power.
+                            </p>
+                        </li>
+                        <li class="flex items-start gap-4 group/item">
+                            <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform">
+                                <i class="fas fa-piggy-bank text-xl"></i>
+                            </div>
+                            <p class="text-white/90 text-sm md:text-base">
+                                <strong class="text-white block font-bold">Massive Energy Savings</strong>
+                                Lower your monthly electricity costs by reducing AC dependency by 30-40%.
+                            </p>
+                        </li>
+                        <li class="flex items-start gap-4 group/item">
+                            <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform">
+                                <i class="fas fa-heart text-xl"></i>
+                            </div>
+                            <p class="text-white/90 text-sm md:text-base">
+                                <strong class="text-white block font-bold">Beautiful Usable Space</strong>
+                                Turn that empty slab into a lush outdoor lounge or an organic vegetable hub.
+                            </p>
+                        </li>
+                    </ul>
+
+                    <div class="mt-12">
+                        <a href="booknow.html" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-primary rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl hover:shadow-white/20 hover:-translate-y-1 transition-all">
+                            Upgrade My Roof Now <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="py-16 md:py-24 bg-white dark:bg-darkBg transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16 md:mb-24">
+            <h2 class="text-3xl md:text-5xl font-black font-[Outfit] text-slate-900 dark:text-white">
+                Why a <span class="text-primary text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Green Roof</span> is a Smart Investment
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+            
+    <div class="group p-6 md:p-8 rounded-[2rem] bg-gray-50 dark:bg-darkCard border-2 border-transparent hover:border-orange-500/30 hover:bg-white dark:hover:bg-slate-800 transition-all duration-500 shadow-sm hover:shadow-2xl text-center">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-orange-100 dark:bg-orange-950/20 text-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i class="fas fa-temperature-low text-xl md:text-2xl"></i>
+        </div>
+        <h4 class="font-bold text-xs md:text-base mb-2 dark:text-white leading-tight font-[Outfit]">Reduce Temp</h4>
+        <p class="hidden md:block text-[10px] text-gray-500 dark:text-gray-400 leading-relaxed">Natural insulation keeps top floors cool in summer.</p>
+    </div>
+
+    <div class="group p-6 md:p-8 rounded-[2rem] bg-gray-50 dark:bg-darkCard border-2 border-transparent hover:border-emerald-500/30 hover:bg-white dark:hover:bg-slate-800 transition-all duration-500 shadow-sm hover:shadow-2xl text-center">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-emerald-100 dark:bg-emerald-950/20 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i class="fas fa-bolt-lightning text-xl md:text-2xl"></i>
+        </div>
+        <h4 class="font-bold text-xs md:text-base mb-2 dark:text-white leading-tight font-[Outfit]">Save Power</h4>
+        <p class="hidden md:block text-[10px] text-gray-500 dark:text-gray-400 leading-relaxed">Reduce AC dependency and save 30-40% on bills.</p>
+    </div>
+
+    <div class="group p-6 md:p-8 rounded-[2rem] bg-gray-50 dark:bg-darkCard border-2 border-transparent hover:border-cyan-500/30 hover:bg-white dark:hover:bg-slate-800 transition-all duration-500 shadow-sm hover:shadow-2xl text-center">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-cyan-100 dark:bg-cyan-950/20 text-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i class="fas fa-wind text-xl md:text-2xl"></i>
+        </div>
+        <h4 class="font-bold text-xs md:text-base mb-2 dark:text-white leading-tight font-[Outfit]">Pure Air</h4>
+        <p class="hidden md:block text-[10px] text-gray-500 dark:text-gray-400 leading-relaxed">Plants filter urban pollutants and release oxygen.</p>
+    </div>
+
+    <div class="group p-6 md:p-8 rounded-[2rem] bg-gray-50 dark:bg-darkCard border-2 border-transparent hover:border-blue-500/30 hover:bg-white dark:hover:bg-slate-800 transition-all duration-500 shadow-sm hover:shadow-2xl text-center">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 dark:bg-blue-950/20 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i class="fas fa-shield-halved text-xl md:text-2xl"></i>
+        </div>
+        <h4 class="font-bold text-xs md:text-base mb-2 dark:text-white leading-tight font-[Outfit]">Roof Shield</h4>
+        <p class="hidden md:block text-[10px] text-gray-500 dark:text-gray-400 leading-relaxed">Shields concrete from UV rays and thermal cracks.</p>
+    </div>
+
+    <div class="group p-6 md:p-8 rounded-[2rem] bg-gray-50 dark:bg-darkCard border-2 border-transparent hover:border-yellow-500/30 hover:bg-white dark:hover:bg-slate-800 transition-all duration-500 shadow-sm hover:shadow-2xl text-center">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-yellow-100 dark:bg-yellow-950/20 text-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i class="fas fa-arrow-trend-up text-xl md:text-2xl"></i>
+        </div>
+        <h4 class="font-bold text-xs md:text-base mb-2 dark:text-white leading-tight font-[Outfit]">High ROI</h4>
+        <p class="hidden md:block text-[10px] text-gray-500 dark:text-gray-400 leading-relaxed">Premium green features increase real estate value.</p>
+    </div>
+
+    <div class="group p-6 md:p-8 rounded-[2rem] bg-gray-50 dark:bg-darkCard border-2 border-transparent hover:border-purple-500/30 hover:bg-white dark:hover:bg-slate-800 transition-all duration-500 shadow-sm hover:shadow-2xl text-center">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-purple-100 dark:bg-purple-950/20 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i class="fas fa-leaf text-xl md:text-2xl"></i>
+        </div>
+        <h4 class="font-bold text-xs md:text-base mb-2 dark:text-white leading-tight font-[Outfit]">Eco Living</h4>
+        <p class="hidden md:block text-[10px] text-gray-500 dark:text-gray-400 leading-relaxed">Live sustainably and reduce your carbon footprint.</p>
+    </div>
+
+</div>
+    </div>
+</section><section class="py-16 md:py-24 bg-slate-900 overflow-hidden relative">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div class="text-center mb-16">
+            <h2 class="text-2xl md:text-4xl font-black font-[Outfit] text-white uppercase tracking-[0.2em]">
+                Results That <span class="text-primary">Matter</span>
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            
+            <div class="group relative p-10 rounded-[3rem] bg-white/5 backdrop-blur-md border border-white/10 text-center hover:bg-white/10 hover:border-primary/50 transition-all duration-500">
+                <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 text-primary group-hover:scale-110 transition-transform">
+                    <i class="fas fa-temperature-arrow-down text-xl"></i>
+                </div>
+                <div class="text-5xl md:text-6xl lg:text-7xl font-black font-[Outfit] text-white mb-2 group-hover:text-primary transition-colors">
+                    10°C
+                </div>
+                <div class="text-primary text-[10px] font-black uppercase tracking-widest mb-4">Reduction</div>
+                <p class="text-gray-400 text-sm font-medium leading-relaxed">
+                    Maximum indoor temperature drop achieved during peak Chennai summers.
+                </p>
+            </div>
+
+            <div class="group relative p-10 rounded-[3rem] bg-white/5 backdrop-blur-md border border-white/10 text-center hover:bg-white/10 hover:border-primary/50 transition-all duration-500">
+                <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 text-primary group-hover:scale-110 transition-transform">
+                    <i class="fas fa-bolt-lightning text-xl"></i>
+                </div>
+                <div class="text-5xl md:text-6xl lg:text-7xl font-black font-[Outfit] text-white mb-2 group-hover:text-primary transition-colors">
+                    30%
+                </div>
+                <div class="text-primary text-[10px] font-black uppercase tracking-widest mb-4">Energy Savings</div>
+                <p class="text-gray-400 text-sm font-medium leading-relaxed">
+                    Average reduction in monthly and the electricity bills for air conditioning and commercial.
+                </p> 
+            </div>
+
+            <div class="group relative p-10 rounded-[3rem] bg-white/5 backdrop-blur-md border border-white/10 text-center hover:bg-white/10 hover:border-primary/50 transition-all duration-500">
+                <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 text-primary group-hover:scale-110 transition-transform">
+                    <i class="fas fa-city text-xl"></i>
+                </div>
+                <div class="text-5xl md:text-6xl lg:text-7xl font-black font-[Outfit] text-white mb-2 group-hover:text-primary transition-colors">
+                    500+
+                </div>
+                <div class="text-primary text-[10px] font-black uppercase tracking-widest mb-4">Projects Done</div>
+                <p class="text-gray-400 text-sm font-medium leading-relaxed">
+                    Successful installations across residential and commercial buildings.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="mt-16 flex flex-col md:flex-row items-center justify-center gap-4 text-gray-500 text-[10px] font-bold uppercase tracking-widest">
+            <span class="flex items-center gap-2"><i class="fas fa-check-circle text-primary"></i> Data-Verified Results</span>
+            <span class="hidden md:block">|</span>
+            <span class="flex items-center gap-2"><i class="fas fa-check-circle text-primary"></i> Client Approved</span>
+            <span class="hidden md:block">|</span>
+            <span class="flex items-center gap-2"><i class="fas fa-check-circle text-primary"></i> ROI Focused</span>
+        </div>
+    </div>
+</section>
+<section class="py-16 md:py-24 bg-white dark:bg-darkBg transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-12 lg:mb-20 max-w-2xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-extrabold font-[Outfit]">Our <span class="text-primary">Core Services</span></h2>
+            <p class="text-gray-500 dark:text-gray-400 mt-4 text-sm md:text-base">We design, build, and maintain thriving rooftop environments across Madurai and Chennai.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-darkCard h-96 shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer">
+                <img src="assets/Rooftop Vegetable Garden" 
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Rooftop Vegetable Garden">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-8 flex flex-col justify-end">
+                    
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-3xl">🌿</span>
+                        <span class="text-4xl font-black text-white/50 heading-font">01</span>
+                    </div>
+                    <h3 class="text-xl font-bold heading-font mb-1 text-white">Rooftop Vegetable Garden</h3>
+                    <p class="text-gray-200 text-sm opacity-90 leading-relaxed mb-4">Grow fresh, organic vegetables right on your terrace for a healthy farm-to-table lifestyle.</p>
+
+                    <div class="overflow-hidden h-0 group-hover:h-auto transition-all duration-500">
+                        <ul class="space-y-2 mb-6 text-gray-100 text-xs font-bold uppercase tracking-wider">
+                            <li><i class="fas fa-check text-primary mr-2"></i> Grow Bags / Containers</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Quality Soil Mix</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Seasonal Plantings</li>
+                        </ul>
+                        <button class="w-full py-3 bg-primary text-slate-900 rounded-xl font-bold text-sm shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                            Get started for ₹15,000
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-darkCard h-96 shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer">
+                <img src="assets/Green Roof Installation1" 
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Green Roof Installation">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-8 flex flex-col justify-end">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-3xl">🌱</span>
+                        <span class="text-4xl font-black text-white/50 heading-font">02</span>
+                    </div>
+                    <h3 class="text-xl font-bold heading-font mb-1 text-white">Green Roof Installation</h3>
+                    <p class="text-gray-200 text-sm opacity-90 leading-relaxed mb-4">Convert your roof into a cooling, eco-friendly green layer that reduces urban heat.</p>
+
+                    <div class="overflow-hidden h-0 group-hover:h-auto transition-all duration-500">
+                        <ul class="space-y-2 mb-6 text-gray-100 text-xs font-bold uppercase tracking-wider">
+                            <li><i class="fas fa-check text-primary mr-2"></i> Waterproofing Layers</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Drainage System</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Soil & Plant Setup</li>
+                        </ul>
+                        <button class="w-full py-3 bg-primary text-slate-900 rounded-xl font-bold text-sm shadow-lg hover:scale-[1.02] transition-all">
+                            Learn About Waterproofing
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-darkCard h-96 shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer">
+                <img src="assets/Terrace Landscaping1" 
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Terrace Landscaping">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-8 flex flex-col justify-end">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-3xl">🌳</span>
+                        <span class="text-4xl font-black text-white/50 heading-font">03</span>
+                    </div>
+                    <h3 class="text-xl font-bold heading-font mb-1 text-white">Terrace Landscaping</h3>
+                    <p class="text-gray-200 text-sm opacity-90 leading-relaxed mb-4">Design a beautiful, relaxing outdoor sanctuary with custom lawns and seating areas.</p>
+
+                    <div class="overflow-hidden h-0 group-hover:h-auto transition-all duration-500">
+                        <ul class="space-y-2 mb-6 text-gray-100 text-xs font-bold uppercase tracking-wider">
+                            <li><i class="fas fa-check text-primary mr-2"></i> Lawn Setup</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Decorative Plants</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Seating Design</li>
+                        </ul>
+                        <button class="w-full py-3 bg-primary text-slate-900 rounded-xl font-bold text-sm shadow-lg hover:scale-[1.02] transition-all">
+                            View Design Portfolio
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-darkCard h-96 shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer">
+                <img src="assets/Drip Irrigation Systems1" 
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Drip Irrigation">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-8 flex flex-col justify-end">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-3xl">💧</span>
+                        <span class="text-4xl font-black text-white/50 heading-font">04</span>
+                    </div>
+                    <h3 class="text-xl font-bold heading-font mb-1 text-white">Drip Irrigation Systems</h3>
+                    <p class="text-gray-200 text-sm opacity-90 leading-relaxed mb-4">Automated watering solutions to ensure your plants thrive while you save time and water.</p>
+
+                    <div class="overflow-hidden h-0 group-hover:h-auto transition-all duration-500">
+                        <ul class="space-y-2 mb-6 text-gray-100 text-xs font-bold uppercase tracking-wider">
+                            <li><i class="fas fa-check text-primary mr-2"></i> Pipe Setup</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Timer System</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Water Optimization</li>
+                        </ul>
+                        <button class="w-full py-3 bg-primary text-slate-900 rounded-xl font-bold text-sm shadow-lg hover:scale-[1.02] transition-all">
+                            Get automated watering
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-darkCard h-96 shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer">
+                <img src="assets/Hydroponics Setup1" 
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Hydroponics Setup">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-8 flex flex-col justify-end">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-3xl">🌿</span>
+                        <span class="text-4xl font-black text-white/50 heading-font">05</span>
+                    </div>
+                    <h3 class="text-xl font-bold heading-font mb-1 text-white">Hydroponics Setup</h3>
+                    <p class="text-gray-200 text-sm opacity-90 leading-relaxed mb-4">Soil-free modern farming system designed for maximum yield in limited urban spaces.</p>
+
+                    <div class="overflow-hidden h-0 group-hover:h-auto transition-all duration-500">
+                        <ul class="space-y-2 mb-6 text-gray-100 text-xs font-bold uppercase tracking-wider">
+                            <li><i class="fas fa-check text-primary mr-2"></i> Nutrient Systems</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Vertical Setups</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Faster Plant Growth</li>
+                        </ul>
+                        <button class="w-full py-3 bg-primary text-slate-900 rounded-xl font-bold text-sm shadow-lg hover:scale-[1.02] transition-all">
+                            View Hydroponic Kits
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-darkCard h-96 shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer">
+                <img src="assets/Maintenance & Support" 
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Horticultural Maintenance">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-8 flex flex-col justify-end">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-3xl">🔧</span>
+                        <span class="text-4xl font-black text-white/50 heading-font">06</span>
+                    </div>
+                    <h3 class="text-xl font-bold heading-font mb-1 text-white">Maintenance & Support</h3>
+                    <p class="text-gray-200 text-sm opacity-90 leading-relaxed mb-4">Keep your rooftop green all year round with our professional horticultural care.</p>
+
+                    <div class="overflow-hidden h-0 group-hover:h-auto transition-all duration-500">
+                        <ul class="space-y-2 mb-6 text-gray-100 text-xs font-bold uppercase tracking-wider">
+                            <li><i class="fas fa-check text-primary mr-2"></i> Regular Expert Visits</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Plant Health Checks</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Organic Pest Control</li>
+                        </ul>
+                        <button class="w-full py-3 bg-primary text-slate-900 rounded-xl font-bold text-sm shadow-lg hover:scale-[1.02] transition-all">
+                            Subscribe to Care Plans
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="py-16 md:py-24 bg-white dark:bg-darkBg transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-black font-[Outfit] text-slate-900 dark:text-white mb-4">
+                Designed for <span class="text-primary">Every Rooftop</span>
+            </h2>
+            <p class="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
+                Whether you own a private villa or manage a corporate hub, we have a green roof system designed for your needs.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div class="group relative p-8 rounded-[2.5rem] bg-gray-50 dark:bg-darkCard border-2 border-transparent hover:border-primary/30 transition-all duration-500 shadow-sm hover:shadow-2xl">
+                <div class="w-14 h-14 bg-white dark:bg-darkBg rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                    <i class="fas fa-house-chimney text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold font-[Outfit] mb-2 dark:text-white">Homeowners</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
+                    Turn your terrace into a private sanctuary and grow organic food for your family.
+                </p>
+                <div class="pt-4 border-t border-gray-200 dark:border-gray-800">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-primary">Key Benefit:</span>
+                    <p class="text-[11px] font-bold mt-1 text-slate-700 dark:text-gray-300">100% Organic Lifestyle</p>
+                </div>
+            </div>
+
+            <div class="group relative p-8 rounded-[2.5rem] bg-gray-50 dark:bg-darkCard border-2 border-transparent hover:border-primary/30 transition-all duration-500 shadow-sm hover:shadow-2xl">
+                <div class="w-14 h-14 bg-white dark:bg-darkBg rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                    <i class="fas fa-building-user text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold font-[Outfit] mb-2 dark:text-white">Apartment Residents</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
+                    Collaborative green spaces for communities that reduce building-wide heat.
+                </p>
+                <div class="pt-4 border-t border-gray-200 dark:border-gray-800">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-primary">Key Benefit:</span>
+                    <p class="text-[11px] font-bold mt-1 text-slate-700 dark:text-gray-300">Shared Cooling Impact</p>
+                </div>
+            </div>
+
+            <div class="group relative p-8 rounded-[2.5rem] bg-gray-50 dark:bg-darkCard border-2 border-transparent hover:border-primary/30 transition-all duration-500 shadow-sm hover:shadow-2xl">
+                <div class="w-14 h-14 bg-white dark:bg-darkBg rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                    <i class="fas fa-helmet-safety text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold font-[Outfit] mb-2 dark:text-white">Builders</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
+                    Add "Eco-Friendly" value to your projects and increase property marketability.
+                </p>
+                <div class="pt-4 border-t border-gray-200 dark:border-gray-800">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-primary">Key Benefit:</span>
+                    <p class="text-[11px] font-bold mt-1 text-slate-700 dark:text-gray-300">High Resale Premium</p>
+                </div>
+            </div>
+
+            <div class="group relative p-8 rounded-[2.5rem] bg-gray-50 dark:bg-darkCard border-2 border-transparent hover:border-primary/30 transition-all duration-500 shadow-sm hover:shadow-2xl">
+                <div class="w-14 h-14 bg-white dark:bg-darkBg rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                    <i class="fas fa-briefcase text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold font-[Outfit] mb-2 dark:text-white">Offices</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
+                    Enhance employee wellness and hit corporate sustainability (ESG) goals.
+                </p>
+                <div class="pt-4 border-t border-gray-200 dark:border-gray-800">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-primary">Key Benefit:</span>
+                    <p class="text-[11px] font-bold mt-1 text-slate-700 dark:text-gray-300">Energy Bill Savings</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="py-16 md:py-24 bg-white dark:bg-darkBg transition-colors duration-300" x-data="{ billing: 'monthly' }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-extrabold heading-font mb-4">
+                Simple, <span class="text-primary">Transparent</span> Pricing
+            </h2>
+            <p class="text-gray-500 dark:text-gray-400 mb-8 text-sm sm:text-base">Choose the plan that fits your rooftop space.</p>
+            
+            <div class="flex items-center justify-center gap-4">
+                <span :class="billing === 'monthly' ? 'text-slate-900 dark:text-white font-bold' : 'text-gray-400'" class="text-sm transition-all">Monthly</span>
+                <button @click="billing = (billing === 'monthly' ? 'yearly' : 'monthly')" 
+                        class="relative w-14 h-7 bg-gray-200 dark:bg-gray-800 rounded-full transition-colors duration-300 focus:outline-none">
+                    <div class="absolute top-1 left-1 w-5 h-5 bg-primary rounded-full transition-transform duration-300 transform"
+                         :class="billing === 'yearly' ? 'translate-x-7' : 'translate-x-0'"></div>
+                </button>
+                <span :class="billing === 'yearly' ? 'text-slate-900 dark:text-white font-bold' : 'text-gray-400'" class="text-sm transition-all">Yearly <span class="text-primary text-[10px] bg-primary/10 px-1.5 py-0.5 rounded ml-1">Save 20%</span></span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8 items-end">
+            
+            <div class="p-5 lg:p-8 rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-darkCard hover:shadow-xl transition-all duration-300">
+                <h3 class="text-base lg:text-lg font-bold mb-2">Seedling</h3>
+                <div class="mb-6">
+                    <span class="text-3xl lg:text-4xl font-black heading-font" x-text="billing === 'monthly' ? '$29' : '$23'"></span>
+                    <span class="text-gray-400 text-xs lg:text-sm">/mo</span>
+                </div>
+                <p class="text-[13px] lg:text-sm text-gray-500 dark:text-gray-400 mb-8 leading-tight">Small apartment balconies.</p>
+                <ul class="space-y-3 lg:space-y-4 mb-8">
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i class="fas fa-check text-primary"></i> 50 sq. ft</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i class="fas fa-check text-primary"></i> Manual Guide</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i class="fas fa-check text-primary"></i> Soil Check</li>
+                </ul>
+                <button class="w-full py-3 rounded-xl border border-primary text-primary text-sm font-bold hover:bg-primary hover:text-white transition-all">Get Started</button>
+            </div>
+
+            <div class="relative p-6 lg:p-8 rounded-3xl bg-slate-900 dark:bg-primary border-4 border-primary dark:border-white shadow-2xl md:scale-105 z-10">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary dark:bg-white text-white dark:text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">Most Popular</div>
+                <h3 class="text-base lg:text-lg font-bold mb-2 text-white">Growth</h3>
+                <div class="mb-6 text-white">
+                    <span class="text-4xl lg:text-5xl font-black heading-font" x-text="billing === 'monthly' ? '$79' : '$63'"></span>
+                    <span class="opacity-70 text-xs lg:text-sm">/mo</span>
+                </div>
+                <p class="text-[13px] lg:text-sm text-white/70 mb-8 leading-tight">Terrace farms.</p>
+                <ul class="space-y-3 lg:space-y-4 mb-8 text-white">
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i class="fas fa-check"></i> 500 sq. ft</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i class="fas fa-check"></i> Auto Drip</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i class="fas fa-check"></i> Expert Visit</li>
+                </ul>
+                <button class="w-full py-4 rounded-xl bg-primary dark:bg-white text-white dark:text-primary text-sm font-bold shadow-lg hover:opacity-90 transition-all">Start Farming</button>
+            </div>
+
+            <div class="p-5 lg:p-8 rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-darkCard hover:shadow-xl transition-all duration-300">
+                <h3 class="text-base lg:text-lg font-bold mb-2">Harvest</h3>
+                <div class="mb-6">
+                    <span class="text-3xl lg:text-4xl font-black heading-font" x-text="billing === 'monthly' ? '$199' : '$159'"></span>
+                    <span class="text-gray-400 text-xs lg:text-sm">/mo</span>
+                </div>
+                <p class="text-[13px] lg:text-sm text-gray-500 dark:text-gray-400 mb-8 leading-tight">Industrial roofs.</p>
+                <ul class="space-y-3 lg:space-y-4 mb-8">
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i class="fas fa-check text-primary"></i> Unlimited</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i class="fas fa-check text-primary"></i> Hydroponic</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i class="fas fa-check text-primary"></i> Farm Manager</li>
+                </ul>
+                <button class="w-full py-3 rounded-xl border border-primary text-primary text-sm font-bold hover:bg-primary hover:text-white transition-all">Contact Sales</button>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="py-16 md:py-24 bg-white dark:bg-darkBg transition-colors duration-300 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16">
+            <span class="text-primary font-bold tracking-widest text-xs uppercase bg-primary/10 px-3 py-1 rounded-full">Testimonials</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold heading-font mt-4">
+                What Our <span class="text-primary">Clients Say</span>
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            
+            <div class="group relative p-8 md:p-10 bg-gray-50 dark:bg-darkCard rounded-[2rem] border border-transparent hover:border-primary/30 transition-all duration-300">
+                <div class="absolute -top-4 left-10 w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30">
+                    <i class="fas fa-quote-left"></i>
+                </div>
+                
+                <p class="text-lg md:text-xl font-medium leading-relaxed text-slate-800 dark:text-gray-200 mb-8 ">
+                    “Our terrace is now our favorite place! The transition from a hot concrete slab to a lush green retreat has completely changed how we spend our evenings.”
+                </p>
+
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 p-0.5">
+                        <img src="assets/t1" alt="Client" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h4 class="font-bold heading-font text-slate-900 dark:text-white">Arun Kumar</h4>
+                        <p class="text-xs text-primary font-semibold uppercase tracking-wider">Homeowner, Madurai</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative p-8 md:p-10 bg-gray-50 dark:bg-darkCard rounded-[2rem] border border-transparent hover:border-primary/30 transition-all duration-300">
+                <div class="absolute -top-4 left-10 w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30">
+                    <i class="fas fa-quote-left"></i>
+                </div>
+                
+                <p class="text-lg md:text-xl font-medium leading-relaxed text-slate-800 dark:text-gray-200 mb-8 ">
+                    “The heat reduction is incredible! We noticed a significant drop in our AC bills, and growing our own organic tomatoes and spinach is a dream come true.”
+                </p>
+
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 p-0.5">
+                        <img src="assets/t2" alt="Client" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h4 class="font-bold heading-font text-slate-900 dark:text-white">Priya Dharshini</h4>
+                        <p class="text-xs text-primary font-semibold uppercase tracking-wider">Apartment Resident, Chennai</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-16 flex flex-wrap justify-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all">
+            <span class="text-sm font-bold tracking-tighter">TRUSTED BY 10+ REAL ESTATE DEVELOPERS</span>
+        </div>
+    </div>
+</section>
+<section class="py-16 md:py-24 bg-white dark:bg-darkBg transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="relative rounded-[3.5rem] bg-slate-900 overflow-hidden shadow-2xl shadow-primary/20">
+            
+            <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-48 h-48 bg-emerald-500/10 blur-[80px] rounded-full translate-y-1/2 -translate-x-1/2"></div>
+
+            <div class="relative z-10 flex flex-col lg:flex-row items-center">
+                
+                <div class="w-full lg:w-5/12 p-10 md:p-16 lg:p-20 text-white">
+                    <span class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-primary text-[10px] font-black uppercase tracking-widest mb-6 border border-white/10">
+                        Limited Availability
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-black font-[Outfit] leading-tight mb-6">
+                        Get Your <span class="text-primary">Free</span> Green Roof Plan
+                    </h2>
+                    <p class="text-gray-400 text-sm md:text-base mb-10 leading-relaxed">
+                        Enter your details and our Chennai experts will create a custom cooling and layout plan for your rooftop.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-300 uppercase tracking-wider">No obligation consultation</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-300 uppercase tracking-wider">Custom 3D Design Preview</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-7/12 p-8 md:p-16 lg:p-20 bg-white/5 backdrop-blur-md border-l border-white/10">
+                    <form action="booknow.html" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
+                            <input type="text" placeholder="Srinivas K A" 
+                                   class="w-full px-6 py-4 bg-slate-800/50 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Phone Number</label>
+                            <input type="tel" placeholder="+91 9XXXX XXXXX" 
+                                   class="w-full px-6 py-4 bg-slate-800/50 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all">
+                        </div>
+
+                        <div class="space-y-2 md:col-span-2">
+                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Rooftop Size (Approx. Sq.Ft)</label>
+                            <select class="w-full px-6 py-4 bg-slate-800/50 border border-white/10 rounded-2xl text-white focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all appearance-none">
+                                <option value="" disabled selected class="text-gray-500">Select your area size...</option>
+                                <option value="small">Below 500 Sq.Ft</option>
+                                <option value="medium">500 - 1500 Sq.Ft</option>
+                                <option value="large">Above 1500 Sq.Ft</option>
+                                <option value="commercial">Commercial / Large Scale</option>
+                            </select>
+                        </div>
+
+                        <div class="md:col-span-2 pt-4">
+                            <button type="submit" 
+                                    class="w-full py-5 bg-primary text-slate-900 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3">
+                                Get My Free Green Roof Plan
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <p class="md:col-span-2 text-center text-[10px] text-gray-500 font-medium">
+                            <i class="fas fa-lock mr-1"></i> Your data is safe with VEXA TECH. No spam, ever.
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+  <footer class="bg-white dark:bg-darkBg border-t border-gray-100 dark:border-gray-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div class="space-y-6">
+                    <a href="index.html">
+                <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white">🌱</div>
+                        <span class="text-xl font-bold heading-font text-primary">GreenRoof</span>
+                    </div>
+                    </a>
+                   
+                    <p class="text-sm text-gray-500 leading-relaxed">Making cities greener, one roof at a time. We specialize in sustainable urban farming and modular green roof systems.</p>
+                  <div class="flex gap-4">
+    <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-primary hover:text-white transition-all duration-300 shadow-sm" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+    
+    <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-primary hover:text-white transition-all duration-300 shadow-sm" aria-label="X">
+        <i class="fab fa-x-twitter"></i>
+    </a>
+    
+    <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-primary hover:text-white transition-all duration-300 shadow-sm" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+    </a>
+
+    <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-primary hover:text-white transition-all duration-300 shadow-sm" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+    </a>
+</div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 heading-font">Quick Links</h4>
+                    <ul class="space-y-4 text-sm text-gray-500">
+                        <li><a href="index.html" class="hover:text-primary transition">Home</a></li>
+                     <li><a href="home2.html" class="hover:text-primary transition">Home2</a></li>
+
+                        <li><a href="about.html" class="hover:text-primary transition">About Us</a></li>
+                        <li><a href="service.html" class="hover:text-primary transition">Services</a></li>
+                        <li><a href="booknow.html" class="hover:text-primary transition">Book Now</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 heading-font">Explore</h4>
+                    <ul class="space-y-4 text-sm text-gray-500">
+                        <li><a href="gallery.html" class="hover:text-primary transition">Gallery</a></li>
+                        <li><a href="contact.html" class="hover:text-primary transition">Contact</a></li>
+                        <li><a href="pricing.html" class="hover:text-primary transition">Pricing</a></li>
+
+                        <li><a href="comingsoon.html" class="hover:text-primary transition">Coming Soon</a></li>
+                        <li><a href="404.html" class="hover:text-primary transition">404 Page</a></li>
+
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 heading-font">Stay Updated</h4>
+                    <p class="text-sm text-gray-500 mb-4">Join our newsletter for urban farming tips.</p>
+                    <form class="flex gap-2">
+                        <input type="email" placeholder="Email" class="bg-gray-100 dark:bg-gray-800 border-none rounded-lg px-4 py-2 text-sm w-full focus:ring-2 focus:ring-primary">
+                        <button class="bg-primary text-white p-2 rounded-lg">➔</button>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center pt-8 border-t border-gray-100 dark:border-gray-800 text-xs text-gray-400">
+                &copy; 2026 GreenRoof. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function appData() {
+            return {
+                darkMode: localStorage.getItem('theme') === 'dark',
+                ltr: localStorage.getItem('dir') !== 'rtl',
+                
+                toggleTheme() {
+                    this.darkMode = !this.darkMode;
+                    localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
+                },
+                
+                toggleLtr() {
+                    this.ltr = !this.ltr;
+                    localStorage.setItem('dir', this.ltr ? 'ltr' : 'rtl');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
