@@ -35,20 +35,20 @@
     </style>
 </head>
 <body class="bg-gray-50 text-slate-900 dark:bg-darkBg dark:text-gray-100 transition-colors duration-300">
-
-    <nav class="fixed w-full z-50 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800" x-data="{ mobileMenu: false, profileDrop: false }">
-       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-20">
+  <nav class="fixed w-full z-50 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800" x-data="{ mobileMenu: false, profileDrop: false }">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20 gap-2">
         <a href="index.html" class="flex-shrink-0">
             <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white text-xl">🌱</div>
-                <span class="text-2xl font-bold heading-font tracking-tight text-primary">GreenRoof</span>
+                <div class="w-8 h-8 md:w-10 md:h-10 bg-primary rounded-lg flex items-center justify-center text-white text-lg">🌱</div>
+                <span class="text-xl md:text-2xl font-bold tracking-tight text-primary">GreenRoof</span>
             </div>
         </a>
-        
 
-        <div class="hidden lg:flex items-center space-x-4 xl:space-x-8">
-            <div id="nav-menu" class="hidden lg:flex items-center space-x-8">
+        <div class="hidden lg:flex items-center justify-end flex-1 ml-4 xl:ml-8 gap-4 xl:gap-8">
+            
+            <nav id="nav-menu">
+                      <div id="nav-menu" class="hidden lg:flex items-center space-x-8">
     <div class="flex space-x-6 text-sm font-medium">
         <a href="index.html" class="nav-link hover:text-primary transition py-2 border-b-2 border-transparent">Home</a>
         <a href="home2.html" class="nav-link hover:text-primary transition py-2 border-b-2 border-transparent">Home2</a>
@@ -58,7 +58,8 @@
         <a href="contact.html" class="nav-link hover:text-primary transition py-2 border-b-2 border-transparent">Contact</a>
     </div>
     </div>
-    <script>
+            </nav>
+             <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Get the current page filename (e.g., "about.html")
         const currentPath = window.location.pathname.split("/").pop();
@@ -83,37 +84,36 @@
     });
 </script>
 
-            <div class="relative" x-data="{ profileDrop: false }">
-                <button @click="profileDrop = !profileDrop" @click.away="profileDrop = false" class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded-full hover:bg-gray-200 transition">
-                    <div class="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center text-xs">👤</div>
-                    <span class="text-xs font-semibold">User</span>
-                </button>
-                <div x-show="profileDrop" x-transition class="absolute right-0 mt-2 w-48 bg-white dark:bg-darkCard rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 py-2 z-50">
-                    <a href="user.html" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm">User Dashboard</a>
+            <div class="flex items-center gap-3 xl:gap-6">
+                <div class="relative" x-data="{ profileDrop: false }">
+                    <button @click="profileDrop = !profileDrop" @click.away="profileDrop = false" class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded-full hover:bg-gray-200 transition">
+                        <div class="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center text-xs">👤</div>
+                        <span class="text-xs font-semibold hidden xl:block">User</span>
+                    </button>
+                    <div x-show="profileDrop" x-transition class="absolute right-0 mt-2 w-48 bg-white dark:bg-darkCard rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 py-2 z-50">
+                        <a href="user.html" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm">User Dashboard</a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <a href="booknow.html" class="hidden xl:block">
+                        <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition whitespace-nowrap">Book Now</button>
+                    </a>
+                    <a href="login.html">
+                        <button class="border border-primary text-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary hover:text-white transition whitespace-nowrap">Login</button>
+                    </a>
+                </div>
+
+                <div class="flex gap-2 border-l pl-3 xl:pl-4 dark:border-gray-700">
+                    <button @click="toggleTheme()" class="w-9 h-9 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 transition-colors">
+                        <span x-text="darkMode ? '☀️' : '🌙'"></span>
+                    </button>
+                    <button @click="toggleLtr()" class="w-9 h-9 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 text-[10px] font-bold transition-colors uppercase">
+                        <span x-text="ltr ? 'LTR' : 'RTL'"></span>
+                    </button>
                 </div>
             </div>
-
-            <div class="flex items-center gap-2 xl:gap-3">
-                <a href="booknow.html">
-                <button class="bg-primary text-white px-4 xl:px-5 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition whitespace-nowrap">Book Now</button>
-
-                </a>
-                <a href="login.html">
-                <button class="border border-primary text-primary px-4 xl:px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary hover:text-white transition">Login</button>
-
-                </a>
-            </div>
-
-            <div class="flex gap-2 border-l pl-4 dark:border-gray-700">
-                <button @click="toggleTheme()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 transition-colors">
-                    <span x-text="darkMode ? '☀️' : '🌙'"></span>
-                </button>
-                <button @click="toggleLtr()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-[10px] font-bold transition-colors">
-                    <span x-text="ltr ? 'LTR' : 'RTL'"></span>
-                </button>
-            </div>
         </div>
-        
 
         <button @click="mobileMenu = !mobileMenu" class="lg:hidden p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +122,6 @@
             </svg>
         </button>
     </div>
-   
 </div>
 
    <div x-show="mobileMenu" 
@@ -201,12 +200,21 @@
                 </span>
             </div>
 
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black font-[Outfit] text-white mb-6 leading-tight tracking-tight">
-                Growing Greener Cities, <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">
-                    One Rooftop at a Time
-                </span>
-            </h1>
+          <div class="max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto px-4">
+    
+    <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black font-[Outfit] text-white mb-8 leading-[1.1] md:leading-[1.05] tracking-tight transition-all duration-500">
+        
+        <span class="block lg:inline">Growing Greener Cities,</span>
+        
+        <br class="hidden md:block">
+        
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-400 to-teal-300 drop-shadow-sm">
+            One Rooftop at a Time
+        </span>
+        
+    </h1>
+
+</div>
 
             <p class="text-gray-300 text-sm md:text-lg lg:text-xl font-medium leading-relaxed mb-10 max-w-xl opacity-90">
                 We transform unused rooftops into thriving green spaces that bring nature back into urban life 🌿. From high-tech hydroponics to organic vegetable farms.

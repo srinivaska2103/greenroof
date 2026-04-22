@@ -36,19 +36,20 @@
 </head>
 <body class="bg-gray-50 text-slate-900 dark:bg-darkBg dark:text-gray-100 transition-colors duration-300">
 
-    <nav class="fixed w-full z-50 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800" x-data="{ mobileMenu: false, profileDrop: false }">
-       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-20">
+      <nav class="fixed w-full z-50 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800" x-data="{ mobileMenu: false, profileDrop: false }">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20 gap-2">
         <a href="index.html" class="flex-shrink-0">
             <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white text-xl">🌱</div>
-                <span class="text-2xl font-bold heading-font tracking-tight text-primary">GreenRoof</span>
+                <div class="w-8 h-8 md:w-10 md:h-10 bg-primary rounded-lg flex items-center justify-center text-white text-lg">🌱</div>
+                <span class="text-xl md:text-2xl font-bold tracking-tight text-primary">GreenRoof</span>
             </div>
         </a>
-        
 
-        <div class="hidden lg:flex items-center space-x-4 xl:space-x-8">
-            <div id="nav-menu" class="hidden lg:flex items-center space-x-8">
+        <div class="hidden lg:flex items-center justify-end flex-1 ml-4 xl:ml-8 gap-4 xl:gap-8">
+            
+            <nav id="nav-menu">
+                      <div id="nav-menu" class="hidden lg:flex items-center space-x-8">
     <div class="flex space-x-6 text-sm font-medium">
         <a href="index.html" class="nav-link hover:text-primary transition py-2 border-b-2 border-transparent">Home</a>
         <a href="home2.html" class="nav-link hover:text-primary transition py-2 border-b-2 border-transparent">Home2</a>
@@ -58,7 +59,8 @@
         <a href="contact.html" class="nav-link hover:text-primary transition py-2 border-b-2 border-transparent">Contact</a>
     </div>
     </div>
-    <script>
+            </nav>
+             <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Get the current page filename (e.g., "about.html")
         const currentPath = window.location.pathname.split("/").pop();
@@ -83,37 +85,36 @@
     });
 </script>
 
-            <div class="relative" x-data="{ profileDrop: false }">
-                <button @click="profileDrop = !profileDrop" @click.away="profileDrop = false" class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded-full hover:bg-gray-200 transition">
-                    <div class="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center text-xs">👤</div>
-                    <span class="text-xs font-semibold">User</span>
-                </button>
-                <div x-show="profileDrop" x-transition class="absolute right-0 mt-2 w-48 bg-white dark:bg-darkCard rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 py-2 z-50">
-                    <a href="user.html" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm">User Dashboard</a>
+            <div class="flex items-center gap-3 xl:gap-6">
+                <div class="relative" x-data="{ profileDrop: false }">
+                    <button @click="profileDrop = !profileDrop" @click.away="profileDrop = false" class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded-full hover:bg-gray-200 transition">
+                        <div class="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center text-xs">👤</div>
+                        <span class="text-xs font-semibold hidden xl:block">User</span>
+                    </button>
+                    <div x-show="profileDrop" x-transition class="absolute right-0 mt-2 w-48 bg-white dark:bg-darkCard rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 py-2 z-50">
+                        <a href="user.html" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm">User Dashboard</a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <a href="booknow.html" class="hidden xl:block">
+                        <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition whitespace-nowrap">Book Now</button>
+                    </a>
+                    <a href="login.html">
+                        <button class="border border-primary text-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary hover:text-white transition whitespace-nowrap">Login</button>
+                    </a>
+                </div>
+
+                <div class="flex gap-2 border-l pl-3 xl:pl-4 dark:border-gray-700">
+                    <button @click="toggleTheme()" class="w-9 h-9 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 transition-colors">
+                        <span x-text="darkMode ? '☀️' : '🌙'"></span>
+                    </button>
+                    <button @click="toggleLtr()" class="w-9 h-9 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 text-[10px] font-bold transition-colors uppercase">
+                        <span x-text="ltr ? 'LTR' : 'RTL'"></span>
+                    </button>
                 </div>
             </div>
-
-            <div class="flex items-center gap-2 xl:gap-3">
-                <a href="booknow.html">
-                <button class="bg-primary text-white px-4 xl:px-5 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition whitespace-nowrap">Book Now</button>
-
-                </a>
-                <a href="login.html">
-                <button class="border border-primary text-primary px-4 xl:px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary hover:text-white transition">Login</button>
-
-                </a>
-            </div>
-
-            <div class="flex gap-2 border-l pl-4 dark:border-gray-700">
-                <button @click="toggleTheme()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 transition-colors">
-                    <span x-text="darkMode ? '☀️' : '🌙'"></span>
-                </button>
-                <button @click="toggleLtr()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-[10px] font-bold transition-colors">
-                    <span x-text="ltr ? 'LTR' : 'RTL'"></span>
-                </button>
-            </div>
         </div>
-        
 
         <button @click="mobileMenu = !mobileMenu" class="lg:hidden p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +123,6 @@
             </svg>
         </button>
     </div>
-   
 </div>
 
    <div x-show="mobileMenu" 
@@ -329,21 +329,21 @@
 <section class="py-16 md:py-24 bg-gray-50 dark:bg-darkBg transition-colors duration-300" x-data="{ openModal: false, project: {} }">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             
     <div @click="openModal = true; project = { title: 'Residential Terrace Garden', type: 'Home', loc: 'Anna Nagar, Chennai', size: '1,200', result: 'Reduced heat by 10°C', img: 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&q=80&w=800' }" 
-         class="group relative overflow-hidden rounded-[2.5rem] bg-white dark:bg-darkCard shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer h-[450px]">
+         class="group relative overflow-hidden rounded-[2.5rem] bg-white dark:bg-darkCard shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer h-[400px] md:h-[450px]">
         
         <img src="assets/Terrace Landscaping" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Project">
 
-        <div class="absolute bottom-4 left-4 right-4 bg-white/80 dark:bg-darkCard/80 backdrop-blur-md p-6 rounded-[2rem] border border-white/20 shadow-xl">
+        <div class="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4 bg-white/80 dark:bg-darkCard/80 backdrop-blur-md p-5 md:p-6 rounded-[2rem] border border-white/20 shadow-xl">
             <div class="flex justify-between items-start mb-2">
-                <span class="text-[10px] font-black uppercase tracking-widest text-primary bg-primary/10 px-2 py-1 rounded-md">Home</span>
-                <span class="text-[10px] font-bold text-gray-400">1,200 sq.ft</span>
+                <span class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-primary bg-primary/10 px-2 py-1 rounded-md">Home</span>
+                <span class="text-[9px] md:text-[10px] font-bold text-gray-400">1,200 sq.ft</span>
             </div>
-            <h3 class="text-lg font-bold font-[Outfit] leading-tight mb-1 dark:text-white">Residential Terrace Garden</h3>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mb-3 italic">Anna Nagar, Chennai</p>
-            <div class="flex items-center gap-2 text-primary font-bold text-sm">
+            <h3 class="text-base md:text-lg font-bold font-[Outfit] leading-tight mb-1 dark:text-white">Residential Terrace</h3>
+            <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 mb-3 italic">Anna Nagar, Chennai</p>
+            <div class="flex items-center gap-2 text-primary font-bold text-xs md:text-sm">
                 <i class="fas fa-temperature-low"></i>
                 <span>Reduced heat by 10°C</span>
             </div>
@@ -351,43 +351,39 @@
     </div>
 
     <div @click="openModal = true; project = { title: 'Corporate Rooftop Farm', type: 'Office', loc: 'Tidel Park, Chennai', size: '4,500', result: '80kg Organic Harvest/mo', img: 'https://images.unsplash.com/photo-1620127252536-40742d4a57f9?auto=format&fit=crop&q=80&w=800' }" 
-         class="group relative overflow-hidden rounded-[2.5rem] bg-white dark:bg-darkCard shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer h-[450px]">
+         class="group relative overflow-hidden rounded-[2.5rem] bg-white dark:bg-darkCard shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer h-[400px] md:h-[450px]">
         
         <img src="assets/Corporate Office Café Garden" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Project">
 
-        <div class="absolute bottom-4 left-4 right-4 bg-white/80 dark:bg-darkCard/80 backdrop-blur-md p-6 rounded-[2rem] border border-white/20 shadow-xl">
+        <div class="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4 bg-white/80 dark:bg-darkCard/80 backdrop-blur-md p-5 md:p-6 rounded-[2rem] border border-white/20 shadow-xl">
             <div class="flex justify-between items-start mb-2">
-                <span class="text-[10px] font-black uppercase tracking-widest text-primary bg-primary/10 px-2 py-1 rounded-md">Office</span>
-                <span class="text-[10px] font-bold text-gray-400">4,500 sq.ft</span>
+                <span class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-primary bg-primary/10 px-2 py-1 rounded-md">Office</span>
+                <span class="text-[9px] md:text-[10px] font-bold text-gray-400">4,500 sq.ft</span>
             </div>
-            <h3 class="text-lg font-bold font-[Outfit] leading-tight mb-1 dark:text-white">Corporate Rooftop Farm</h3>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mb-3 italic">Tidel Park, Chennai</p>
-            <div class="flex items-center gap-2 text-primary font-bold text-sm">
+            <h3 class="text-base md:text-lg font-bold font-[Outfit] leading-tight mb-1 dark:text-white">Corporate Farm</h3>
+            <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 mb-3 italic">Tidel Park, Chennai</p>
+            <div class="flex items-center gap-2 text-primary font-bold text-xs md:text-sm">
                 <i class="fas fa-leaf"></i>
-                <span>80kg Organic Harvest/mo</span>
+                <span>80kg Harvest/mo</span>
             </div>
         </div>
     </div>
 
-    <div @click="openModal = true; project = { title: 'Modern Green Roof', type: 'Apartment', loc: 'Velachery, Chennai', size: '2,800', result: 'Reduced heat by 8°C', img: 'https://images.unsplash.com/photo-1620127656910-a19398f5963f?auto=format&fit=crop&q=80&w=800' }" 
-         class="group relative overflow-hidden rounded-[2.5rem] bg-white dark:bg-darkCard shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer h-[400px] md:h-[300px] lg:h-[450px] md:col-span-2 lg:col-span-1">
+    <div @click="openModal = true; project = { title: 'Modern Green Wall', type: 'Office', loc: 'Tidel Park, Chennai', size: '4,500', result: '80kg Organic Harvest/mo', img: 'https://images.unsplash.com/photo-1620127252536-40742d4a57f9?auto=format&fit=crop&q=80&w=800' }" 
+         class="group relative overflow-hidden rounded-[2.5rem] bg-white dark:bg-darkCard shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer h-[400px] md:h-[450px]">
         
         <img src="assets/Modern Balcony Green Wall" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Project">
 
-        <div class="absolute bottom-4 left-4 right-4 bg-white/80 dark:bg-darkCard/80 backdrop-blur-md p-6 rounded-[2rem] border border-white/20 shadow-xl">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                <div>
-                    <div class="flex items-center gap-3 mb-1">
-                        <span class="text-[10px] font-black uppercase tracking-widest text-primary bg-primary/10 px-2 py-1 rounded-md">Apartment</span>
-                        <span class="text-[10px] font-bold text-gray-400">2,800 sq.ft</span>
-                    </div>
-                    <h3 class="text-lg font-bold font-[Outfit] leading-tight dark:text-white">Modern Green Roof</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 italic">Velachery, Chennai</p>
-                </div>
-                <div class="flex items-center gap-2 text-primary font-bold text-sm border-t md:border-t-0 md:border-l border-gray-200 dark:border-gray-700 pt-2 md:pt-0 md:pl-4">
-                    <i class="fas fa-temperature-low"></i>
-                    <span>Reduced heat by 8°C</span>
-                </div>
+        <div class="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4 bg-white/80 dark:bg-darkCard/80 backdrop-blur-md p-5 md:p-6 rounded-[2rem] border border-white/20 shadow-xl">
+            <div class="flex justify-between items-start mb-2">
+                <span class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-primary bg-primary/10 px-2 py-1 rounded-md">Design</span>
+                <span class="text-[9px] md:text-[10px] font-bold text-gray-400">4,500 sq.ft</span>
+            </div>
+            <h3 class="text-base md:text-lg font-bold font-[Outfit] leading-tight mb-1 dark:text-white">Modern Green Wall</h3>
+            <p class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 mb-3 italic">Tidel Park, Chennai</p>
+            <div class="flex items-center gap-2 text-primary font-bold text-xs md:text-sm">
+                <i class="fas fa-leaf"></i>
+                <span>Air Purifying Zone</span>
             </div>
         </div>
     </div>
@@ -590,50 +586,42 @@
             </button>
         </div>
 
-       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             
     <div x-show="locale === 'all' || locale === 'chennai'" x-transition 
-         class="group bg-white dark:bg-darkCard rounded-[2rem] p-4 border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-all">
-        <div class="relative h-64 rounded-2xl overflow-hidden mb-6">
-            <img src="assets/pr1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-            <div class="absolute top-4 left-4 bg-white/90 dark:bg-darkCard/90 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-tighter text-primary">
+         class="group bg-white dark:bg-darkCard rounded-[2rem] p-4 border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-all duration-300">
+        <div class="relative h-56 md:h-40 lg:h-64 rounded-2xl overflow-hidden mb-6">
+            <img src="assets/pr1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Anna Nagar">
+            <div class="absolute top-4 left-4 bg-white/90 dark:bg-darkCard/90 backdrop-blur-md px-3 py-1 rounded-lg text-[9px] lg:text-[10px] font-black uppercase tracking-tighter text-primary">
                 Anna Nagar, Chennai
             </div>
         </div>
-        <h4 class="font-bold text-lg px-2 dark:text-white font-[Outfit]">Eco-Terrace Transformation</h4>
-        <p class="text-xs text-gray-500 dark:text-gray-400 px-2 mt-1">2,400 sq.ft • Reduced heat by 9°C</p>
+        <h4 class="font-bold text-base lg:text-lg px-2 dark:text-white font-[Outfit] leading-tight">Eco-Terrace Transformation</h4>
+        <p class="text-[10px] lg:text-xs text-gray-500 dark:text-gray-400 px-2 mt-2 font-medium">2,400 sq.ft • Reduced heat by 9°C</p>
     </div>
 
     <div x-show="locale === 'all' || locale === 'apartments'" x-transition 
-         class="group bg-white dark:bg-darkCard rounded-[2rem] p-4 border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-all">
-        <div class="relative h-64 rounded-2xl overflow-hidden mb-6">
-            <img src="assets/pr2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-            <div class="absolute top-4 left-4 bg-white/90 dark:bg-darkCard/90 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-tighter text-primary">
-                OMR Apartment Project
+         class="group bg-white dark:bg-darkCard rounded-[2rem] p-4 border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-all duration-300">
+        <div class="relative h-56 md:h-40 lg:h-64 rounded-2xl overflow-hidden mb-6">
+            <img src="assets/pr2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="OMR Project">
+            <div class="absolute top-4 left-4 bg-white/90 dark:bg-darkCard/90 backdrop-blur-md px-3 py-1 rounded-lg text-[9px] lg:text-[10px] font-black uppercase tracking-tighter text-primary">
+                OMR Apartment
             </div>
         </div>
-        <h4 class="font-bold text-lg px-2 dark:text-white font-[Outfit]">Vertical Hydroponic Hub</h4>
-        <p class="text-xs text-gray-500 dark:text-gray-400 px-2 mt-1">Common Roof Area • Community Farm</p>
+        <h4 class="font-bold text-base lg:text-lg px-2 dark:text-white font-[Outfit] leading-tight">Vertical Hydroponic Hub</h4>
+        <p class="text-[10px] lg:text-xs text-gray-500 dark:text-gray-400 px-2 mt-2 font-medium">Common Roof • Community Farm</p>
     </div>
 
-    <div x-show="locale === 'all' || locale === 'villas'" x-transition 
-         class="group bg-white dark:bg-darkCard rounded-[2rem] p-4 border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-all md:col-span-2 lg:col-span-1">
-        
-        <div class="flex flex-col md:flex-row gap-6">
-            <div class="relative h-64 md:h-auto md:w-1/2 rounded-2xl overflow-hidden flex-shrink-0">
-                <img src="assets/pr3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                <div class="absolute top-4 left-4 bg-white/90 dark:bg-darkCard/90 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-tighter text-primary">
-                    East Coast Road (ECR)
-                </div>
-            </div>
-            <div class="flex flex-col justify-center px-2">
-                <h4 class="font-bold text-lg dark:text-white font-[Outfit]">Luxury Villa Landscaping</h4>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">1,800 sq.ft • Tropical Flora Theme</p>
-                <p class="hidden md:block lg:hidden text-[10px] text-gray-400 mt-4 leading-relaxed">
-                    A custom landscape design integrated with automated drip irrigation and specialized nutrient-rich soil layers for coastal durability.
-                </p>
+    <div x-show="locale === 'all' || locale === 'apartments'" x-transition 
+         class="group bg-white dark:bg-darkCard rounded-[2rem] p-4 border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-all duration-300">
+        <div class="relative h-56 md:h-40 lg:h-64 rounded-2xl overflow-hidden mb-6">
+            <img src="assets/pr3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Luxury Hub">
+            <div class="absolute top-4 left-4 bg-white/90 dark:bg-darkCard/90 backdrop-blur-md px-3 py-1 rounded-lg text-[9px] lg:text-[10px] font-black uppercase tracking-tighter text-primary">
+                OMR Apartment
             </div>
         </div>
+        <h4 class="font-bold text-base lg:text-lg px-2 dark:text-white font-[Outfit] leading-tight">Luxury Apartment Hub</h4>
+        <p class="text-[10px] lg:text-xs text-gray-500 dark:text-gray-400 px-2 mt-2 font-medium">Common Roof • Community Farm</p>
     </div>
 
 </div>
