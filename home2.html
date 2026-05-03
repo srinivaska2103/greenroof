@@ -41,7 +41,7 @@
     <div class="flex justify-between items-center h-20 gap-2">
         <a href="index.html" class="flex-shrink-0">
             <div class="flex items-center gap-2">
-                <div class="w-8 h-8 md:w-10 md:h-10 bg-primary rounded-lg flex items-center justify-center text-white text-lg">🌱</div>
+                <div class="w-8 h-8 md:w-10 md:h-10  flex items-center justify-center text-white text-lg">🌱</div>
                 <span class="text-xl md:text-2xl font-bold tracking-tight text-primary">GreenRoof</span>
             </div>
         </a>
@@ -186,65 +186,87 @@
     </p>
 </div>
 
-<section class="relative min-h-[85vh] flex items-center bg-slate-900 overflow-hidden transition-colors duration-300">
-    <div class="absolute inset-0 z-0">
-        <img src="assets/Lush Green Roof Installation" 
-             class="w-full h-full object-cover opacity-40" alt="Lush Green Roof Installation">
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
-    </div>
+<section class="relative min-h-[90vh] flex items-center justify-center bg-white dark:bg-darkBg transition-colors duration-300 text-center">
+    <!-- Background Image & Gradient Scrim -->
+  <div class="absolute inset-0 z-0 overflow-hidden">
+    <!-- Image: Increased dark opacity for better visibility -->
+    <img src="assets/Lush Green Roof Installation" 
+         class="w-full h-full object-cover opacity-40 dark:opacity-40 transition-opacity duration-500" 
+         alt="Lush Green Roof Installation">
+    
+    <!-- Sophisticated Scrim: 
+         1. A radial mask to keep the center dark (for text contrast)
+         2. A linear bottom fade to blend into the next section
+    -->
+    <div class="absolute inset-0 bg-slate-900/40 dark:bg-zinc-950/40"></div> <!-- Base tint -->
+    
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(15,23,42,0.9)_80%)] dark:bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(9,9,11,0.9)_80%)]"></div>
+    
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900 dark:to-zinc-950"></div>
+</div>
 
-    <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary/20 blur-[120px] rounded-full"></div>
+    <!-- Decorative Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 blur-[150px] rounded-full pointer-events-none"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div class="max-w-3xl">
+        <div class="max-w-4xl mx-auto flex flex-col items-center">
             
-            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 mb-8">
-                <i class="fas fa-temperature-arrow-down text-primary"></i>
-                <span class="text-white text-[10px] md:text-xs font-bold uppercase tracking-widest">
-                    Beat the Chennai Heat
-                </span>
-            </div>
+            <!-- Badge -->
+          <!-- Badge with responsive top spacing -->
+<div class="mt-8 md:mt-12 lg:mt-16 inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 mb-8 shadow-2xl">
+    <svg class="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+        <path d="m21 16-4 4-4-4"/>
+        <path d="M17 20V4"/>
+        <path d="m3 8 4-4 4 4"/>
+        <path d="M7 4v16"/>
+    </svg>
+    <span class="text-white text-[10px] md:text-xs font-black uppercase tracking-[0.2em]">
+        Beat the Chennai Heat
+    </span>
+</div>
 
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black font-[Outfit] text-white mb-6 leading-[1.1]">
+            <!-- Main Heading -->
+            <h1 class="text-5xl md:text-7xl lg:text-6xl font-semibold tracking-tighter text-white mb-8 leading-[0.95] drop-shadow-2xl">
                 Reduce Heat by <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400 ">Up to 10°C</span> <br>
-                with a Green Roof 🌿
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-sky-300 to-emerald-400">Up to 10°C</span> <br>
+                with a Green Roof
             </h1>
 
-            <p class="text-gray-300 text-sm md:text-lg lg:text-xl font-medium leading-relaxed mb-10 max-w-xl opacity-90">
-                Save electricity, grow fresh plants, and upgrade your rooftop with a professionally installed, water-efficient green roof system by VEXA TECH.
+            <!-- Paragraph -->
+            <p class="text-gray-300 dark:text-zinc-400 text-base md:text-xl lg:text-2xl font-medium leading-relaxed mb-12 max-w-2xl opacity-90">
+                Save electricity, grow fresh plants, and upgrade your rooftop with a professionally installed, water-efficient ecosystem by <span class="text-white font-bold">VEXA TECH</span>.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center gap-4 lg:gap-6">
-                <a href="booknow.html" class="w-full sm:w-auto px-10 py-5 bg-primary text-slate-900 rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all text-center">
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
+                <a href="booknow.html" class="w-full sm:w-auto px-12 py-5 bg-primary text-slate-900 rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-primary/40 hover:scale-105 active:scale-95 transition-all text-center">
                     Get Free Consultation
                 </a>
-                <a href="contact.html">
-<button class="w-full sm:w-auto px-10 py-5 bg-white/5 backdrop-blur-md border border-white/20 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all text-center flex items-center justify-center gap-2">
-                    <i class="fas fa-calculator"></i>
+                <a href="contact.html" class="w-full sm:w-auto px-12 py-5 bg-white/5 backdrop-blur-xl border border-white/10 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all text-center flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
                     Get Instant Quote
-                </button>
                 </a>
-                
             </div>
 
-            <div class="mt-12 flex flex-wrap gap-6 md:gap-10">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary border border-white/10">
-                        <i class="fas fa-bolt"></i>
+            <!-- Stats Bar -->
+            <div class="mt-16 flex flex-wrap items-center justify-center gap-8 md:gap-16 border-t border-white/5 pt-12 w-full">
+                <div class="flex items-center gap-4 group">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-primary border border-white/10 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                     </div>
-                    <div>
-                        <span class="block text-white font-bold text-sm">30% Lower Bills</span>
-                        <span class="text-[10px] text-gray-500 uppercase font-bold tracking-tighter">Electricity Savings</span>
+                    <div class="text-left">
+                        <span class="block text-white font-black text-lg leading-none">30% Lower Bills</span>
+                        <span class="text-[9px] text-zinc-500 uppercase font-black tracking-widest">Electricity Savings</span>
                     </div>
                 </div>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary border border-white/10">
-                        <i class="fas fa-shield-alt"></i>
+                
+                <div class="flex items-center gap-4 group">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-primary border border-white/10 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                     </div>
-                    <div>
-                        <span class="block text-white font-bold text-sm">Waterproofed</span>
-                        <span class="text-[10px] text-gray-500 uppercase font-bold tracking-tighter">Layered Protection</span>
+                    <div class="text-left">
+                        <span class="block text-white font-black text-lg leading-none">Waterproofed</span>
+                        <span class="text-[9px] text-zinc-500 uppercase font-black tracking-widest">Layered Protection</span>
                     </div>
                 </div>
             </div>
@@ -252,97 +274,131 @@
         </div>
     </div>
 </section>
-<section class="py-16 md:py-24 bg-white dark:bg-darkBg transition-colors duration-300">
+<!-- Problem vs Solution: Interactive Perspective Switcher -->
+<section 
+    x-data="{ showSolution: true }" 
+    class="py-24 bg-white dark:bg-darkBg transition-colors duration-300 overflow-hidden"
+>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-0 rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200 dark:shadow-none border border-gray-100 dark:border-gray-800">
+        <!-- Toggle Controller -->
+        <div class="flex flex-col items-center mb-16">
+            <span class="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400 mb-6">Compare Your Environment</span>
+            <div class="relative bg-white dark:bg-zinc-900 p-2 rounded-3xl border border-gray-100 dark:border-zinc-800 shadow-xl flex items-center">
+                <button 
+                    @click="showSolution = false" 
+                    :class="!showSolution ? 'bg-red-500 text-white' : 'text-gray-400'"
+                    class="px-8 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all duration-500"
+                >
+                    The Struggle
+                </button>
+                <button 
+                    @click="showSolution = true" 
+                    :class="showSolution ? 'bg-primary text-white' : 'text-gray-400'"
+                    class="px-8 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all duration-500"
+                >
+                    The Solution
+                </button>
+            </div>
+        </div>
+
+        <div class="relative min-h-[600px] flex items-center justify-center">
             
-            <div class="w-full lg:w-1/2 p-10 md:p-16 lg:p-20 bg-slate-50 dark:bg-slate-900/50 relative overflow-hidden">
-                <div class="relative z-10">
-                    <span class="inline-block px-4 py-1 rounded-full bg-red-100 text-red-600 text-[10px] font-black uppercase tracking-widest mb-6">
-                        Current Struggle
-                    </span>
-                    <h2 class="text-3xl md:text-4xl font-black font-[Outfit] text-slate-800 dark:text-white mb-8">
-                        Tired of a <span class="text-red-500">Scorching</span> Roof?
+            <!-- Side 01: The Struggle (Thermal Reality) -->
+            <div 
+                x-show="!showSolution" 
+                x-transition:enter="transition ease-out duration-700"
+                x-transition:enter-start="opacity-0 -translate-x-12"
+                x-transition:enter-end="opacity-100 translate-x-0"
+                class="w-full grid lg:grid-cols-2 gap-12 items-center"
+            >
+                <div class="order-2 lg:order-1 space-y-10">
+                    <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter text-gray-900 dark:text-white leading-[0.9]">
+                        Tired of a <span class="text-red-500">Scorching</span> <br> Urban Roof?
                     </h2>
                     
-                    <ul class="space-y-6">
-                        <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center flex-shrink-0 text-orange-500">
-                                <i class="fas fa-sun text-xl"></i>
+                    <div class="space-y-8">
+                        <div class="flex gap-6 group">
+                            <div class="w-14 h-14 bg-red-100 dark:bg-red-900/20 text-red-500 rounded-2xl flex items-center justify-center shrink-0 border border-red-200 dark:border-red-800 group-hover:scale-110 transition-transform">
+                                <!-- Manual Sun Icon -->
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
                             </div>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm md:text-base">
-                                <strong class="text-slate-800 dark:text-gray-200 block">Extreme Summer Heat</strong>
-                                Concrete absorbs radiation, turning your top floor into an oven (45°C+).
-                            </p>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center flex-shrink-0 text-blue-400">
-                                <i class="fas fa-file-invoice-dollar text-xl"></i>
+                            <div>
+                                <h4 class="text-xs font-black uppercase tracking-widest text-red-500 mb-2">Extreme Heat</h4>
+                                <p class="text-gray-500 dark:text-zinc-400 font-medium">Concrete absorbs radiation, turning your top floor into a 45°C+ oven.</p>
                             </div>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm md:text-base">
-                                <strong class="text-slate-800 dark:text-gray-200 block">Sky-High AC Bills</strong>
-                                Your AC works overtime to fight the heat leaking through the ceiling.
-                            </p>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center flex-shrink-0 text-gray-400">
-                                <i class="fas fa-mountain-sun text-xl"></i>
+                        </div>
+
+                        <div class="flex gap-6 group">
+                            <div class="w-14 h-14 bg-orange-100 dark:bg-orange-900/20 text-orange-500 rounded-2xl flex items-center justify-center shrink-0 border border-orange-200 dark:border-orange-800 group-hover:scale-110 transition-transform">
+                                <!-- Manual Receipt Icon -->
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"/><path d="M16 8h-6"/><path d="M16 12H8"/><path d="M13 16H8"/></svg>
                             </div>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm md:text-base">
-                                <strong class="text-slate-800 dark:text-gray-200 block">Wasted Terrace Space</strong>
-                                An empty concrete slab that adds no value to your lifestyle or property.
-                            </p>
-                        </li>
-                    </ul>
+                            <div>
+                                <h4 class="text-xs font-black uppercase tracking-widest text-orange-500 mb-2">Sky-High Bills</h4>
+                                <p class="text-gray-500 dark:text-zinc-400 font-medium">Your AC works overtime to fight the heat leaking through the ceiling slab.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white dark:border-zinc-900">
+                    <div class="absolute inset-0 bg-red-500/10 animate-pulse"></div>
+                    <img src="assets/school" class="w-full h-full object-cover grayscale" alt="Empty Concrete Roof">
                 </div>
             </div>
 
-            <div class="w-full lg:w-1/2 p-10 md:p-16 lg:p-20 bg-primary relative group overflow-hidden transition-all duration-700">
-                <div class="absolute inset-0 bg-gradient-to-br from-primary via-emerald-600 to-teal-700 opacity-90"></div>
-                <div class="absolute -top-24 -right-24 w-64 h-64 bg-white/20 rounded-full blur-3xl animate-pulse"></div>
+            <!-- Side 02: The Solution (Green Paradise) -->
+            <div 
+                x-show="showSolution" 
+                x-transition:enter="transition ease-out duration-700"
+                x-transition:enter-start="opacity-0 translate-x-12"
+                x-transition:enter-end="opacity-100 translate-x-0"
+                class="w-full grid lg:grid-cols-2 gap-12 items-center"
+            >
+                <div class="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl border-8 border-primary dark:border-zinc-800">
+                    <div class="absolute inset-0 bg-primary/20 backdrop-blur-[2px]"></div>
+                    <img src="assets/indexhero" class="w-full h-full object-cover" alt="Lush Green Roof">
+                    <!-- Tech HUD Overlay -->
+                    <div class="absolute top-8 left-8 p-4 bg-black/40 backdrop-blur-xl rounded-2xl border border-white/20 text-white">
+                        <p class="text-[8px] font-black uppercase tracking-[0.2em] opacity-60">Temp Diff</p>
+                        <p class="text-2xl font-black">-10.2°C</p>
+                    </div>
+                </div>
 
-                <div class="relative z-10 text-white">
-                    <span class="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest mb-6">
-                        The GreenRoof Way
-                    </span>
-                    <h2 class="text-3xl md:text-4xl font-black font-[Outfit] mb-8 leading-tight">
-                        Transform into a <br> <span class="bg-white text-primary px-2">Green Paradise</span>
+                <div class="space-y-10">
+                    <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter text-gray-900 dark:text-white leading-[0.9]">
+                        Transform into a <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Green Paradise.</span>
                     </h2>
                     
-                    <ul class="space-y-6">
-                        <li class="flex items-start gap-4 group/item">
-                            <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                                <i class="fas fa-leaf text-xl"></i>
+                    <div class="space-y-8">
+                        <div class="flex gap-6 group">
+                            <div class="w-14 h-14 bg-primary text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+                                <!-- Manual Leaf Icon -->
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C10.3 14.52 12 11.13 13 9"/></svg>
                             </div>
-                            <p class="text-white/90 text-sm md:text-base">
-                                <strong class="text-white block font-bold">Natural Cooling Layer</strong>
-                                Reduce indoor temperatures by up to 10°C without spending a rupee on power.
-                            </p>
-                        </li>
-                        <li class="flex items-start gap-4 group/item">
-                            <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                                <i class="fas fa-piggy-bank text-xl"></i>
+                            <div>
+                                <h4 class="text-xs font-black uppercase tracking-widest text-primary mb-2">Natural Cooling</h4>
+                                <p class="text-gray-500 dark:text-zinc-400 font-medium">Reduce indoor temperatures significantly without spending a rupee on power.</p>
                             </div>
-                            <p class="text-white/90 text-sm md:text-base">
-                                <strong class="text-white block font-bold">Massive Energy Savings</strong>
-                                Lower your monthly electricity costs by reducing AC dependency by 30-40%.
-                            </p>
-                        </li>
-                        <li class="flex items-start gap-4 group/item">
-                            <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                                <i class="fas fa-heart text-xl"></i>
-                            </div>
-                            <p class="text-white/90 text-sm md:text-base">
-                                <strong class="text-white block font-bold">Beautiful Usable Space</strong>
-                                Turn that empty slab into a lush outdoor lounge or an organic vegetable hub.
-                            </p>
-                        </li>
-                    </ul>
+                        </div>
 
-                    <div class="mt-12">
-                        <a href="booknow.html" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-primary rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl hover:shadow-white/20 hover:-translate-y-1 transition-all">
-                            Upgrade My Roof Now <i class="fas fa-arrow-right"></i>
+                        <div class="flex gap-6 group">
+                            <div class="w-14 h-14 bg-emerald-500 text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform">
+                                <!-- Manual Piggy Bank Icon -->
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2h0V5Z"/><path d="M7 14h.01"/><path d="M9 5v2"/><path d="M12 5v2"/><path d="M15 5v2"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-black uppercase tracking-widest text-emerald-500 mb-2">Energy Savings</h4>
+                                <p class="text-gray-500 dark:text-zinc-400 font-medium">Lower monthly electricity costs by reducing AC dependency by 30-40%.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <a href="booknow.html" class="inline-flex items-center gap-4 px-10 py-5 bg-primary text-white rounded-2xl font-black uppercase text-xs tracking-widest shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all">
+                            Upgrade My Roof Now 
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </a>
                     </div>
                 </div>
@@ -355,7 +411,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-16 md:mb-24">
-            <h2 class="text-3xl md:text-5xl font-black font-[Outfit] text-slate-900 dark:text-white">
+            <h2 class="text-3xl md:text-6xl font-semibold font-[Outfit] text-slate-900 dark:text-white">
                 Why a <span class="text-primary text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Green Roof</span> is a Smart Investment
             </h2>
         </div>
@@ -412,67 +468,119 @@
 
 </div>
     </div>
-</section><section class="py-16 md:py-24 bg-slate-900 overflow-hidden relative">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+</section>
+<!-- Results Dashboard: Interactive Tech-Metric Design -->
+<section 
+    x-data="{ activeMetric: 2 }" 
+    class="py-24 bg-white dark:bg-darkBg transition-colors duration-300 overflow-hidden relative"
+>
+    <!-- Background Radial Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div class="text-center mb-16">
-            <h2 class="text-2xl md:text-4xl font-black font-[Outfit] text-white uppercase tracking-[0.2em]">
-                Results That <span class="text-primary">Matter</span>
+        <!-- Section Header -->
+        <div class="text-center mb-20">
+            <span class="text-primary font-black uppercase tracking-[0.4em] text-[10px] mb-4 block">Performance Analytics</span>
+            <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter text-gray-900 dark:text-white leading-none">
+                Results That <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-sky-400">Matter.</span>
             </h2>
-            <div class="w-24 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+            <div class="w-16 h-1.5 bg-primary mx-auto mt-8 rounded-full"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        <!-- Interactive Metrics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             
-            <div class="group relative p-10 rounded-[3rem] bg-white/5 backdrop-blur-md border border-white/10 text-center hover:bg-white/10 hover:border-primary/50 transition-all duration-500">
-                <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 text-primary group-hover:scale-110 transition-transform">
-                    <i class="fas fa-temperature-arrow-down text-xl"></i>
+            <!-- Metric 01: Temp Reduction -->
+            <div 
+                @mouseenter="activeMetric = 1"
+                :class="activeMetric === 1 ? 'bg-white dark:bg-zinc-900 border-primary scale-105 shadow-2xl shadow-primary/10' : 'bg-white/50 dark:bg-zinc-900/50 border-gray-100 dark:border-zinc-800 opacity-80'"
+                class="group relative p-10 rounded-[3.5rem] border transition-all duration-500 flex flex-col items-center text-center backdrop-blur-sm cursor-default"
+            >
+                <!-- Technical Scan Line -->
+                <div x-show="activeMetric === 1" class="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent animate-pulse"></div>
+                
+                <div 
+                    :class="activeMetric === 1 ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-zinc-800 text-primary'"
+                    class="mb-8 w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500"
+                >
+                    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
                 </div>
-                <div class="text-5xl md:text-6xl lg:text-7xl font-black font-[Outfit] text-white mb-2 group-hover:text-primary transition-colors">
-                    10°C
+
+                <div class="flex items-end gap-1 mb-2">
+                    <span class="text-6xl lg:text-7xl font-black tracking-tighter text-gray-900 dark:text-white group-hover:text-primary transition-colors">10</span>
+                    <span class="text-3xl font-black text-primary mb-2">°C</span>
                 </div>
-                <div class="text-primary text-[10px] font-black uppercase tracking-widest mb-4">Reduction</div>
-                <p class="text-gray-400 text-sm font-medium leading-relaxed">
-                    Maximum indoor temperature drop achieved during peak Chennai summers.
+                <div class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-6">Thermal Drop</div>
+                
+                <p class="text-sm text-gray-500 dark:text-zinc-500 font-medium leading-relaxed">
+                    Maximum indoor temperature drop achieved during peak Chennai summers via our layering.
                 </p>
             </div>
 
-            <div class="group relative p-10 rounded-[3rem] bg-white/5 backdrop-blur-md border border-white/10 text-center hover:bg-white/10 hover:border-primary/50 transition-all duration-500">
-                <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 text-primary group-hover:scale-110 transition-transform">
-                    <i class="fas fa-bolt-lightning text-xl"></i>
-                </div>
-                <div class="text-5xl md:text-6xl lg:text-7xl font-black font-[Outfit] text-white mb-2 group-hover:text-primary transition-colors">
-                    30%
-                </div>
-                <div class="text-primary text-[10px] font-black uppercase tracking-widest mb-4">Energy Savings</div>
-                <p class="text-gray-400 text-sm font-medium leading-relaxed">
-                    Average reduction in monthly and the electricity bills for air conditioning and commercial.
-                </p> 
-            </div>
+            <!-- Metric 02: Energy Savings -->
+            <div 
+                @mouseenter="activeMetric = 2"
+                :class="activeMetric === 2 ? 'bg-white dark:bg-zinc-900 border-primary scale-105 shadow-2xl shadow-primary/10' : 'bg-white/50 dark:bg-zinc-900/50 border-gray-100 dark:border-zinc-800 opacity-80'"
+                class="group relative p-10 rounded-[3.5rem] border transition-all duration-500 flex flex-col items-center text-center backdrop-blur-sm cursor-default"
+            >
+                <div x-show="activeMetric === 2" class="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent animate-pulse"></div>
 
-            <div class="group relative p-10 rounded-[3rem] bg-white/5 backdrop-blur-md border border-white/10 text-center hover:bg-white/10 hover:border-primary/50 transition-all duration-500">
-                <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 text-primary group-hover:scale-110 transition-transform">
-                    <i class="fas fa-city text-xl"></i>
+                <div 
+                    :class="activeMetric === 2 ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-zinc-800 text-primary'"
+                    class="mb-8 w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500"
+                >
+                    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                 </div>
-                <div class="text-5xl md:text-6xl lg:text-7xl font-black font-[Outfit] text-white mb-2 group-hover:text-primary transition-colors">
-                    500+
+
+                <div class="flex items-end gap-1 mb-2">
+                    <span class="text-6xl lg:text-7xl font-black tracking-tighter text-gray-900 dark:text-white group-hover:text-primary transition-colors">30</span>
+                    <span class="text-3xl font-black text-primary mb-2">%</span>
                 </div>
-                <div class="text-primary text-[10px] font-black uppercase tracking-widest mb-4">Projects Done</div>
-                <p class="text-gray-400 text-sm font-medium leading-relaxed">
-                    Successful installations across residential and commercial buildings.
+                <div class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-6">Energy Savings</div>
+                
+                <p class="text-sm text-gray-500 dark:text-zinc-500 font-medium leading-relaxed">
+                    Average reduction in monthly electricity bills for air conditioning in residential builds.
                 </p>
             </div>
 
+            <!-- Metric 03: Projects -->
+            <div 
+                @mouseenter="activeMetric = 3"
+                :class="activeMetric === 3 ? 'bg-white dark:bg-zinc-900 border-primary scale-105 shadow-2xl shadow-primary/10' : 'bg-white/50 dark:bg-zinc-900/50 border-gray-100 dark:border-zinc-800 opacity-80'"
+                class="group relative p-10 rounded-[3.5rem] border transition-all duration-500 flex flex-col items-center text-center backdrop-blur-sm cursor-default"
+            >
+                <div x-show="activeMetric === 3" class="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent animate-pulse"></div>
+
+                <div 
+                    :class="activeMetric === 3 ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-zinc-800 text-primary'"
+                    class="mb-8 w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500"
+                >
+                    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/></svg>
+                </div>
+
+                <div class="flex items-end gap-1 mb-2">
+                    <span class="text-6xl lg:text-7xl font-black tracking-tighter text-gray-900 dark:text-white group-hover:text-primary transition-colors">500</span>
+                    <span class="text-3xl font-black text-primary mb-2">+</span>
+                </div>
+                <div class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-6">Deployments</div>
+                
+                <p class="text-sm text-gray-500 dark:text-zinc-400 font-medium leading-relaxed">
+                    Successful green ecosystem installations across diverse architectural structures.
+                </p>
+            </div>
         </div>
 
-        <div class="mt-16 flex flex-col md:flex-row items-center justify-center gap-4 text-gray-500 text-[10px] font-bold uppercase tracking-widest">
-            <span class="flex items-center gap-2"><i class="fas fa-check-circle text-primary"></i> Data-Verified Results</span>
-            <span class="hidden md:block">|</span>
-            <span class="flex items-center gap-2"><i class="fas fa-check-circle text-primary"></i> Client Approved</span>
-            <span class="hidden md:block">|</span>
-            <span class="flex items-center gap-2"><i class="fas fa-check-circle text-primary"></i> ROI Focused</span>
+        <!-- Data Verified Footer -->
+        <div class="mt-20 flex flex-wrap justify-center gap-x-12 gap-y-6">
+            <template x-for="label in ['Data-Verified', 'Client Approved', 'ROI Focused']">
+                <div class="flex items-center gap-3">
+                    <div class="w-5 h-5 bg-primary/10 rounded-full flex items-center justify-center">
+                        <svg class="w-3 h-3 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    </div>
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 dark:text-zinc-500" x-text="label"></span>
+                </div>
+            </template>
         </div>
     </div>
 </section>
@@ -480,7 +588,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-12 lg:mb-20 max-w-2xl mx-auto">
-            <h2 class="text-3xl md:text-5xl font-extrabold font-[Outfit]">Our <span class="text-primary">Core Services</span></h2>
+            <h2 class="text-3xl md:text-6xl font-semibold font-[Outfit]">Our <span class="text-primary">Core Services</span></h2>
             <p class="text-gray-500 dark:text-gray-400 mt-4 text-sm md:text-base">We design, build, and maintain thriving rooftop environments across Madurai and Chennai.</p>
         </div>
 
@@ -493,7 +601,6 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-8 flex flex-col justify-end">
                     
                     <div class="flex justify-between items-start mb-2">
-                        <span class="text-3xl">🌿</span>
                         <span class="text-4xl font-black text-white/50 heading-font">01</span>
                     </div>
                     <h3 class="text-xl font-bold heading-font mb-1 text-white">Rooftop Vegetable Garden</h3>
@@ -518,7 +625,6 @@
                 
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-8 flex flex-col justify-end">
                     <div class="flex justify-between items-start mb-2">
-                        <span class="text-3xl">🌱</span>
                         <span class="text-4xl font-black text-white/50 heading-font">02</span>
                     </div>
                     <h3 class="text-xl font-bold heading-font mb-1 text-white">Green Roof Installation</h3>
@@ -543,7 +649,6 @@
                 
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-8 flex flex-col justify-end">
                     <div class="flex justify-between items-start mb-2">
-                        <span class="text-3xl">🌳</span>
                         <span class="text-4xl font-black text-white/50 heading-font">03</span>
                     </div>
                     <h3 class="text-xl font-bold heading-font mb-1 text-white">Terrace Landscaping</h3>
@@ -568,7 +673,6 @@
                 
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-8 flex flex-col justify-end">
                     <div class="flex justify-between items-start mb-2">
-                        <span class="text-3xl">💧</span>
                         <span class="text-4xl font-black text-white/50 heading-font">04</span>
                     </div>
                     <h3 class="text-xl font-bold heading-font mb-1 text-white">Drip Irrigation Systems</h3>
@@ -593,7 +697,6 @@
                 
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-8 flex flex-col justify-end">
                     <div class="flex justify-between items-start mb-2">
-                        <span class="text-3xl">🌿</span>
                         <span class="text-4xl font-black text-white/50 heading-font">05</span>
                     </div>
                     <h3 class="text-xl font-bold heading-font mb-1 text-white">Hydroponics Setup</h3>
@@ -618,7 +721,6 @@
                 
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-8 flex flex-col justify-end">
                     <div class="flex justify-between items-start mb-2">
-                        <span class="text-3xl">🔧</span>
                         <span class="text-4xl font-black text-white/50 heading-font">06</span>
                     </div>
                     <h3 class="text-xl font-bold heading-font mb-1 text-white">Maintenance & Support</h3>
@@ -644,7 +746,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-black font-[Outfit] text-slate-900 dark:text-white mb-4">
+            <h2 class="text-3xl md:text-6xl font-semibold font-[Outfit] text-slate-900 dark:text-white mb-4">
                 Designed for <span class="text-primary">Every Rooftop</span>
             </h2>
             <p class="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
@@ -717,7 +819,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-extrabold heading-font mb-4">
+            <h2 class="text-3xl md:text-6xl font-semibold heading-font mb-4">
                 Simple, <span class="text-primary">Transparent</span> Pricing
             </h2>
             <p class="text-gray-500 dark:text-gray-400 mb-8 text-sm sm:text-base">Choose the plan that fits your rooftop space.</p>
@@ -789,7 +891,7 @@
         
         <div class="text-center mb-16">
             <span class="text-primary font-bold tracking-widest text-xs uppercase bg-primary/10 px-3 py-1 rounded-full">Testimonials</span>
-            <h2 class="text-3xl md:text-4xl font-extrabold heading-font mt-4">
+            <h2 class="text-3xl md:text-6xl font-semibold heading-font mt-4">
                 What Our <span class="text-primary">Clients Say</span>
             </h2>
         </div>
@@ -857,7 +959,7 @@
                     <span class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-primary text-[10px] font-black uppercase tracking-widest mb-6 border border-white/10">
                         Limited Availability
                     </span>
-                    <h2 class="text-3xl md:text-5xl font-black font-[Outfit] leading-tight mb-6">
+                    <h2 class="text-3xl md:text-6xl font-semibold font-[Outfit] leading-tight mb-6">
                         Get Your <span class="text-primary">Free</span> Green Roof Plan
                     </h2>
                     <p class="text-gray-400 text-sm md:text-base mb-10 leading-relaxed">
@@ -925,13 +1027,13 @@
 
     </div>
 </section>
-  <footer class="bg-white dark:bg-darkBg border-t border-gray-100 dark:border-gray-800 pt-16 pb-8">
+ <footer class="bg-white dark:bg-darkBg border-t border-gray-100 dark:border-gray-800 pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 <div class="space-y-6">
                     <a href="index.html">
                 <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white">🌱</div>
+                        <div class="w-8 h-8  flex items-center justify-center text-white">🌱</div>
                         <span class="text-xl font-bold heading-font text-primary">GreenRoof</span>
                     </div>
                     </a>
